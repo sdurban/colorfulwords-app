@@ -1,0 +1,9 @@
+{
+  "register_string": "Not a member yet? Register Here",
+  "signin_string": "Sign In",
+  "password_string": "Password",
+  "passwordrepeat_string": "Repeat Password",
+  "registerbtn_string": "Create your account",
+  "returnlogin_string": "I already have an account, return login",
+  "loginloading_string": "Verifying account, wait a moment..."
+}

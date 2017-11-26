@@ -1,0 +1,110 @@
+@import "../../theme/variables";
+.login {
+  .bckimage {
+    background-size: cover;
+    background-position: center center;
+    width: 100vw;
+    height: 100vh;
+    filter: blur(2px);
+    transition: background-image 1.5s linear;
+    position: absolute;
+  }
+
+  .frontPanel {
+    background-color: map-get($colors, verde);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0.4;
+  }
+  #banner {
+    width: 40vw;
+    display: block;
+    position: absolute;
+    left: 50vw;
+    transform: translate(-50%, 0);
+    margin-top: 5vh;
+    @media only screen
+    and (min-device-width: 768px)
+    and (max-device-width: 1024px)
+    and (orientation: portrait)
+    and (-webkit-min-device-pixel-ratio: 1) {
+      width: 60vw;
+      margin-top: 10vh;
+    }
+  }
+  .contentPage {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    .signinItems {
+      position: fixed;
+      width: 50vw;
+      left: calc(50vw - 25vw);
+    }
+    #signin {
+      bottom: 15vh;
+      text-align: center;
+      margin: 0 auto;
+      @media only screen
+      and (min-device-width: 768px)
+      and (max-device-width: 1024px)
+      and (orientation: portrait)
+      and (-webkit-min-device-pixel-ratio: 1) {
+        bottom: 20vh;
+      }
+    }
+    .form {
+      width: calc(50vw + 16*2px);
+      position: fixed;
+      bottom: 20vh;
+      left: calc(50vw - 25vw - 16px);
+
+      @media only screen
+      and (min-device-width: 768px)
+      and (max-device-width: 1024px)
+      and (orientation: portrait)
+      and (-webkit-min-device-pixel-ratio: 1) {
+        bottom: 25vh;
+      }
+    }
+  }
+
+  .languages {
+    display: flex;
+    position: fixed;
+    right: 2vw;
+    top: 2vh;
+    @media only screen
+    and (min-device-width: 768px)
+    and (max-device-width: 1024px)
+    and (orientation: portrait)
+    and (-webkit-min-device-pixel-ratio: 1) {
+      flex-direction: column;
+    }
+    span {
+      margin-left: 1vw;
+      width: 2.5vw;
+      height: 2.5vh;
+      @media only screen
+      and (min-device-width: 768px)
+      and (max-device-width: 1024px)
+      and (orientation: portrait)
+      and (-webkit-min-device-pixel-ratio: 1) {
+        height: 2vh;
+        margin-left: 0;
+      }
+    }
+  }
+
+  .register {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    text-align: center;
+    background-color: map-get($colors, dark);
+    height: 5vh;
+    font-size: 2vw;
+    padding-top: 1vh;
+  }
+}

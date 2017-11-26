@@ -1,0 +1,68 @@
+<ion-content class="login">
+  <div class="bckimage" [style.background-image]="'url('+ backgroundElement + ')'">
+  </div>
+  <div class="frontPanel">
+  </div>
+  <img src="/assets/imgs/banner.png" id="banner" />
+  {{ context }}
+  <div class="contentPage" *ngIf="context=='login'">
+    <form (ngSubmit)="login()" #registerForm="ngForm" class="form">
+      <ion-row>
+        <ion-col>
+          <ion-list inset>
+
+            <ion-item>
+              <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input type="password" placeholder="{{ 'password_string' | translate }}" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
+            </ion-item>
+
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </form>
+    <button id="signin" class="signinItems" ion-button round color="primary" (click)="login()">{{ "signin_string" | translate }}</button>
+    <div class="register" (click)="changeContext('register')">
+      {{ "register_string" | translate }}
+    </div>
+  </div>
+  <div class="contentPage" *ngIf="context=='register'">
+    <form (ngSubmit)="login()" #registerForm="ngForm" class="form">
+      <ion-row>
+        <ion-col>
+          <ion-list inset>
+
+            <ion-item>
+              <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input type="password" placeholder="{{ 'password_string' | translate }}" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input type="password" placeholder="{{ 'passwordrepeat_string' | translate }}" name="repeatpassword" [(ngModel)]="registerCredentials.repeatpassword" required></ion-input>
+            </ion-item>
+
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </form>
+    <button id="login" class="signinItems" ion-button round color="primary">{{ "registerbtn_string" | translate }}</button>
+    <div class="register" (click)="changeContext('login')">
+      {{ "returnlogin_string" | translate }}
+    </div>
+  </div>
+  <div class="languages">
+    <span class="flag-icon flag-icon-es-ct" (click)="changeLanguage('ca')"></span>
+    <span class="flag-icon flag-icon-es" (click)="changeLanguage('es')"></span>
+    <span class="flag-icon flag-icon-gb" (click)="changeLanguage('en')"></span>
+  </div>
+  <div style="display: none">
+    <img src="/assets/imgs/login-page/1.jpg">
+    <img src="/assets/imgs/login-page/2.jpg">
+    <img src="/assets/imgs/login-page/3.jpg">
+  </div>
+</ion-content>

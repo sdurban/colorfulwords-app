@@ -27,5 +27,11 @@
   "compileOnSave": false,
   "atom": {
     "rewriteTsconfig": false
+  },
+  "baseUrl": "./src",
+  "paths": {
+    "@app/env": [
+      "environments/environment"
+    ]
   }
 }

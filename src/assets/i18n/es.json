@@ -1,0 +1,9 @@
+{
+  "register_string": "Aún no eres usuario? Registrate!",
+  "signin_string": "Inicia sesión",
+  "password_string": "Contraseña",
+  "passwordrepeat_string": "Repite la contraseña",
+  "registerbtn_string": "Crea tu cuenta",
+  "returnlogin_string": "Ya tengo una cuenta, volver a login",
+  "loginloading_string": "Verificando tus credenciales, un momento por favor..."
+}

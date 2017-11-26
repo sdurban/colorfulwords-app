@@ -1,0 +1,9 @@
+{
+  "register_string": "Encara no ets usuari? Registrat!",
+  "signin_string": "Inicia sessió",
+  "password_string": "Contrasenya",
+  "passwordrepeat_string": "Repeteix la contrasenya",
+  "registerbtn_string": "Crea el teu compte",
+  "returnlogin_string": "Ya tinc un compte, tornar al login",
+  "loginloading_string": "Verificant les teves credencials, un moment sisplau..."
+}
