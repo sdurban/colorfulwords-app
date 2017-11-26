@@ -1,0 +1,8 @@
+{
+  "name": "colorfultalk",
+  "app_id": "4178c64e",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
