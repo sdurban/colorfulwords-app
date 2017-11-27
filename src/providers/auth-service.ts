@@ -33,7 +33,8 @@ export class AuthService {
             observer.complete();
           })
           .catch((reject) => {
-            Observable.throw("errorlogin_string");
+            observer.next(false);
+            observer.complete();
         });
       });
     }
@@ -54,7 +55,8 @@ export class AuthService {
             observer.complete();
           })
           .catch(reject => {
-            Observable.throw("errorregister_string");
+            observer.next(false);
+            observer.complete();
           });
       });
     }

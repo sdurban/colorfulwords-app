@@ -43,7 +43,6 @@ export class LoginPage {
   }
 
   login() {
-    //TODO: Catch error not working properly
     this.translate.get('loginloading_string').subscribe(
       value => {
         this.loading = this.loadingCtrl.create({
@@ -86,5 +85,9 @@ export class LoginPage {
         )
       }
     )
+  }
+
+  register() {
+    this.translate.get('')
   }
 }

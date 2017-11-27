@@ -1,4 +1,4 @@
-import { ENV } from '../environment';
+import { ENV } from '@app/env';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/do';
