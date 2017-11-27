@@ -14,7 +14,13 @@
     "target": "es5",
     "typeRoots": [
       "../node_modules/@types"
-    ]
+    ],
+    "baseUrl": "./src",
+    "paths": {
+      "@app/env": [
+        "environments/environment"
+      ]
+    }
   },
   "include": [
     "src/**/*.ts"
@@ -27,11 +33,5 @@
   "compileOnSave": false,
   "atom": {
     "rewriteTsconfig": false
-  },
-  "baseUrl": "./src",
-  "paths": {
-    "@app/env": [
-      "environments/environment"
-    ]
   }
 }
