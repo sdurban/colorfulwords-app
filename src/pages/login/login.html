@@ -1,9 +1,9 @@
-<ion-content class="login">
+<ion-content no-bounce ion-fixed class="login">
   <div class="bckimage" [style.background-image]="'url('+ backgroundElement + ')'">
   </div>
   <div class="frontPanel">
   </div>
-  <img src="/assets/imgs/banner.png" id="banner" />
+  <img src="assets/imgs/banner.png" id="banner" />
   {{ context }}
   <div class="contentPage" *ngIf="context=='login'">
     <form (ngSubmit)="login()" #registerForm="ngForm" class="form">
@@ -50,7 +50,7 @@
         </ion-col>
       </ion-row>
     </form>
-    <button id="login" class="signinItems" ion-button round color="primary">{{ "registerbtn_string" | translate }}</button>
+    <button id="login" class="signinItems" ion-button round color="primary" style="bottom: 15vh;">{{ "registerbtn_string" | translate }}</button>
     <div class="register" (click)="changeContext('login')">
       {{ "returnlogin_string" | translate }}
     </div>

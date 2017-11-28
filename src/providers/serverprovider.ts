@@ -5,25 +5,31 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {HttpClient, HttpHeaders, HttpErrorResponse} from "@angular/common/http";
+import {Device} from "@ionic-native/device";
 
 @Injectable()
 export class ServerProvider {
   urlAPI = ENV.apiURL;
   headers:HttpHeaders;
 
-  constructor(private storage: Storage, private http: HttpClient) {
+  constructor(private storage: Storage, private http: HttpClient, private device: Device) {
     this.headers = new HttpHeaders();
     storage.get('bearer').then((bearer) => {
       if(bearer) {
         let info = JSON.parse(bearer);
         this.headers.append('Authorization', 'Bearer '+info.token);
       }
+      if((<any>window).cordova) {
+        this.headers.append('MachineDescription', this.device.manufacturer+this.device.model);
+      } else {
+        this.headers.append('MachineDescription', 'BrowserDemo');
+      }
     });
   }
 
   login(credentials) {
     return new Promise((resolve, reject) => {
-      this.http.post(this.urlAPI+'login', credentials, {headers: this.headers}).subscribe(data => {
+      this.http.post(this.urlAPI+'user/login', JSON.stringify(credentials), {headers: this.headers}).subscribe(data => {
         if(data['error'] == 0) {
           this.storage.set('bearer', data['bearer']).then(() => {
             this.storage.set('userInfo', data['user']).then(() => {
@@ -45,7 +51,7 @@ export class ServerProvider {
 
   register(credentials) {
     return new Promise((resolve, reject) => {
-      this.http.post(this.urlAPI+'register', credentials, {headers: this.headers}).subscribe(data => {
+      this.http.post(this.urlAPI+'user/register', JSON.stringify(credentials), {headers: this.headers}).subscribe(data => {
         if(data['error'] == 0) {
           this.storage.set('bearer', data['bearer']).then(() => {
             resolve(true);

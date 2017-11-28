@@ -19,10 +19,9 @@ export class ColorfullTalk {
         globalization.getPreferredLanguage().then((res) => {
           translate.use(res.value);
         });
-        statusBar.styleDefault();
+        statusBar.hide();
         splashScreen.hide();
       }
     });
   }
 }
-

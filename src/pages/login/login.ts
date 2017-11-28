@@ -20,7 +20,7 @@ export class LoginPage {
   constructor(public navCtrl: NavController, public translate: TranslateService, public loadingCtrl: LoadingController, private auth: AuthService, private nav: NavController, private alertCtrl: AlertController) {
     this.context = "login";
     this.extensionBackground ='.jpg';
-    this.basePathBackground = '/assets/imgs/login-page/';
+    this.basePathBackground = 'assets/imgs/login-page/';
     this.currentBackground = 1;
     this.backgroundElement = this.basePathBackground+this.currentBackground+this.extensionBackground;
     setInterval(() => {
@@ -88,6 +88,6 @@ export class LoginPage {
   }
 
   register() {
-    this.translate.get('')
+
   }
 }

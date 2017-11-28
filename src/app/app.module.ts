@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Globalization } from '@ionic-native/globalization';
 import { IonicStorageModule } from '@ionic/storage';
-
+import {Device} from "@ionic-native/device";
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -44,6 +44,7 @@ import { LoginPage } from '../pages/login/login';
     StatusBar,
     SplashScreen,
     Globalization,
+    Device,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
     ServerProvider
