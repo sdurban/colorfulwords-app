@@ -15,12 +15,14 @@ import { AuthService } from '../providers/auth-service';
 import { ServerProvider} from "../providers/serverprovider";
 import { ColorfullTalk } from './app.component';
 import { LoginPage } from '../pages/login/login';
+import {DashboardPage} from "../pages/dashboard/dashboard";
 
 
 @NgModule({
   declarations: [
     ColorfullTalk,
-    LoginPage
+    LoginPage,
+    DashboardPage
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,8 @@ import { LoginPage } from '../pages/login/login';
   bootstrap: [IonicApp],
   entryComponents: [
     ColorfullTalk,
-    LoginPage
+    LoginPage,
+    DashboardPage
   ],
   providers: [
     StatusBar,

@@ -6,5 +6,10 @@
   "registerbtn_string": "Crea tu cuenta",
   "returnlogin_string": "Ya tengo una cuenta, volver a login",
   "loginloading_string": "Verificando tus credenciales, un momento por favor...",
-  "loginerror_string": "Hay algun error con los datos de cuenta tu cuenta, puedes visitar https://colorfulwords.com"
+  "loginerror_string": "Hay algun error con los datos de cuenta tu cuenta, puedes visitar https://colorfulwords.com",
+  "boards_title": "Tableros",
+  "items_title": "Objetos",
+  "assets_title": "Ficheros",
+  "configuration_title": "Configuración",
+  "logout_title": "Desconectar"
 }

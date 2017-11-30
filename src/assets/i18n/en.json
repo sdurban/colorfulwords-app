@@ -6,5 +6,10 @@
   "registerbtn_string": "Create your account",
   "returnlogin_string": "I already have an account, return login",
   "loginloading_string": "Verifying account, wait a moment...",
-  "loginerror_string": "Something is wrong with your account credentials, you can get support at https://colorfulwords.com"
+  "loginerror_string": "Something is wrong with your account credentials, you can get support at https://colorfulwords.com",
+  "boards_title": "Boards",
+  "items_title": "Items",
+  "assets_title": "Assets",
+  "configuration_title": "Configuration",
+  "logout_title": "Logout"
 }

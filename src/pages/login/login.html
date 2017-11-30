@@ -1,4 +1,4 @@
-<ion-content no-bounce ion-fixed class="login">
+<ion-content no-bounce ion-fixed  class="login">
   <div class="bckimage" [style.background-image]="'url('+ backgroundElement + ')'">
   </div>
   <div class="frontPanel">
@@ -10,15 +10,12 @@
       <ion-row>
         <ion-col>
           <ion-list inset>
-
             <ion-item>
               <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
             </ion-item>
-
             <ion-item>
               <ion-input type="password" placeholder="{{ 'password_string' | translate }}" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
             </ion-item>
-
           </ion-list>
         </ion-col>
       </ion-row>
@@ -33,24 +30,20 @@
       <ion-row>
         <ion-col>
           <ion-list inset>
-
             <ion-item>
               <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
             </ion-item>
-
             <ion-item>
               <ion-input type="password" placeholder="{{ 'password_string' | translate }}" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
             </ion-item>
-
             <ion-item>
               <ion-input type="password" placeholder="{{ 'passwordrepeat_string' | translate }}" name="repeatpassword" [(ngModel)]="registerCredentials.repeatpassword" required></ion-input>
             </ion-item>
-
           </ion-list>
         </ion-col>
       </ion-row>
     </form>
-    <button id="login" class="signinItems" ion-button round color="primary" style="bottom: 15vh;">{{ "registerbtn_string" | translate }}</button>
+    <button id="login" class="signinItems" ion-button round color="primary" style="bottom: 15vh;" (click)="register()">{{ "registerbtn_string" | translate }}</button>
     <div class="register" (click)="changeContext('login')">
       {{ "returnlogin_string" | translate }}
     </div>
@@ -61,8 +54,8 @@
     <span class="flag-icon flag-icon-gb" (click)="changeLanguage('en')"></span>
   </div>
   <div style="display: none">
-    <img src="/assets/imgs/login-page/1.jpg">
-    <img src="/assets/imgs/login-page/2.jpg">
-    <img src="/assets/imgs/login-page/3.jpg">
+    <img src="assets/imgs/login-page/1.jpg">
+    <img src="assets/imgs/login-page/2.jpg">
+    <img src="assets/imgs/login-page/3.jpg">
   </div>
 </ion-content>

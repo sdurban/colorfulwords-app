@@ -6,5 +6,10 @@
   "registerbtn_string": "Crea el teu compte",
   "returnlogin_string": "Ya tinc un compte, tornar al login",
   "loginloading_string": "Verificant les teves credencials, un moment sisplau...",
-  "loginerror_string": "Hi ha algun error amb les teves dades, sisplau visita la nostra pagina web https://colorfulwords.com"
+  "loginerror_string": "Hi ha algun error amb les teves dades, sisplau visita la nostra pagina web https://colorfulwords.com",
+  "boards_title": "Taulers",
+  "items_title": "Objectes",
+  "assets_title": "Fitxers",
+  "configuration_title": "Configuració",
+  "logout_title": "Desconnectar"
 }
