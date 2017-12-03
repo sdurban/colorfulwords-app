@@ -16,8 +16,8 @@ export class ServerProvider {
     this.headers = new HttpHeaders();
     storage.get('bearer').then((bearer) => {
       if(bearer) {
-        let info = JSON.parse(bearer);
-        this.headers.append('Authorization', 'Bearer '+info.token);
+        let info = bearer;
+        this.headers.append('Authorization', 'Bearer '+info);
       }
       if((<any>window).cordova) {
         this.headers.append('MachineDescription', this.device.manufacturer+this.device.model);
@@ -31,10 +31,8 @@ export class ServerProvider {
     return new Promise((resolve, reject) => {
       this.http.post(this.urlAPI+'user/login', JSON.stringify(credentials), {headers: this.headers}).subscribe(data => {
         if(data['error'] == 0) {
-          this.storage.set('bearer', data['bearer']).then(() => {
-            this.storage.set('userInfo', data['user']).then(() => {
-              resolve(data['user']);
-            })
+          this.storage.set('bearer', data['msg']['dataToken']).then(() => {
+            resolve(true);
           });
         } else {
           reject(-1);
@@ -53,7 +51,7 @@ export class ServerProvider {
     return new Promise((resolve, reject) => {
       this.http.post(this.urlAPI+'user/register', JSON.stringify(credentials), {headers: this.headers}).subscribe(data => {
         if(data['error'] == 0) {
-          this.storage.set('bearer', data['bearer']).then(() => {
+          this.storage.set('bearer', data['msg']['dataToken']).then(() => {
             resolve(true);
           });
         } else {

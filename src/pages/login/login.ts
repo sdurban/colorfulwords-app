@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { LoadingController, Loading, AlertController } from "ionic-angular";
 import { AuthService } from "../../providers/auth-service";
+import {DashboardPage} from "../dashboard/dashboard";
 
 @Component({
   selector: 'page-login',
@@ -55,7 +56,7 @@ export class LoginPage {
         this.auth.login(this.registerCredentials).subscribe(
           value => {
             if(value) {
-              this.nav.setRoot('dashboard');
+              this.nav.setRoot(DashboardPage);
             } else {
               this.loading.dismissAll();
               this.translate.get('loginerror_string').subscribe(
@@ -80,7 +81,7 @@ export class LoginPage {
               });
           },
           () => {
-            console.log("WUT");
+            console.log("Something wrong");
           }
         )
       }
@@ -88,6 +89,47 @@ export class LoginPage {
   }
 
   register() {
+    this.translate.get('createaccount_string').subscribe(
+      value => {
+        this.loading = this.loadingCtrl.create({
+          content: value,
+          dismissOnPageChange: true
+        });
 
+        this.loading.present();
+
+        this.auth.register(this.registerCredentials).subscribe(
+          value => {
+            if(value) {
+              this.nav.setRoot(DashboardPage);
+            } else {
+              this.loading.dismissAll();
+              this.translate.get('registererror_string').subscribe(
+                value => {
+                  let alert = this.alertCtrl.create({
+                    title: value,
+                    buttons: ['OK']
+                  });
+                  alert.present(prompt);
+                });
+            }
+          },
+          err => {
+            this.loading.dismissAll();
+            this.translate.get(err).subscribe(
+              value => {
+                let alert = this.alertCtrl.create({
+                  title: value,
+                  buttons: ['OK']
+                });
+                alert.present(prompt);
+              });
+          },
+          () => {
+            console.log("Something wrong");
+          }
+        )
+      }
+    )
   }
 }

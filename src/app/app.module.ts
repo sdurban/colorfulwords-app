@@ -16,6 +16,8 @@ import { ServerProvider} from "../providers/serverprovider";
 import { ColorfullTalk } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import {DashboardPage} from "../pages/dashboard/dashboard";
+import {SQLite} from "@ionic-native/sqlite";
+import {DatabaseService} from "../providers/DatabaseService";
 
 
 @NgModule({
@@ -50,7 +52,9 @@ import {DashboardPage} from "../pages/dashboard/dashboard";
     Device,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
-    ServerProvider
+    ServerProvider,
+    SQLite,
+    DatabaseService
   ]
 })
 export class AppModule {}

@@ -7,6 +7,7 @@ import { LoginPage } from '../pages/login/login';
 import { DashboardPage } from "../pages/dashboard/dashboard";
 import { Globalization } from '@ionic-native/globalization';
 import { Storage } from "@ionic/storage";
+import { DatabaseService } from "../providers/DatabaseService";
 
 @Component({
   templateUrl: 'app.html'

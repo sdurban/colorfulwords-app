@@ -7,6 +7,8 @@
   "returnlogin_string": "Ya tinc un compte, tornar al login",
   "loginloading_string": "Verificant les teves credencials, un moment sisplau...",
   "loginerror_string": "Hi ha algun error amb les teves dades, sisplau visita la nostra pagina web https://colorfulwords.com",
+  "createaccount_string": "S'esta creant el compte, sisplau espera uns segons..",
+  "registererror_string": "No ha pogut ser posible crear el compte en aquest moment, sisplau intenta-ho mes tard",
   "boards_title": "Taulers",
   "items_title": "Objectes",
   "assets_title": "Fitxers",

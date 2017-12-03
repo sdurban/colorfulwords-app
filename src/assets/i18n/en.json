@@ -7,6 +7,8 @@
   "returnlogin_string": "I already have an account, return login",
   "loginloading_string": "Verifying account, wait a moment...",
   "loginerror_string": "Something is wrong with your account credentials, you can get support at https://colorfulwords.com",
+  "createaccount_string": "Se esta creado la cuenta, por favor espera unos instantes",
+  "registererror_string": "No ha sido posible crear la cuenta por favor intentalo mas tarde",
   "boards_title": "Boards",
   "items_title": "Items",
   "assets_title": "Assets",

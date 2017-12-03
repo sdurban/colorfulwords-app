@@ -7,6 +7,8 @@
   "returnlogin_string": "Ya tengo una cuenta, volver a login",
   "loginloading_string": "Verificando tus credenciales, un momento por favor...",
   "loginerror_string": "Hay algun error con los datos de cuenta tu cuenta, puedes visitar https://colorfulwords.com",
+  "createaccount_string": "Creating account, this may take a while...",
+  "registererror_string": "Something is wrong, please try again later",
   "boards_title": "Tableros",
   "items_title": "Objetos",
   "assets_title": "Ficheros",

@@ -1,11 +1,6 @@
 <ion-menu [content]="content" [swipeEnabled]="false">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>ColorfulTalk</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
   <ion-content>
+    <img class="logo" src="assets/imgs/banner.png" />
     <ion-list>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{ p.title | translate }}
