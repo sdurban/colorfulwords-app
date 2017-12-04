@@ -13,5 +13,7 @@
   "items_title": "Objetos",
   "assets_title": "Ficheros",
   "configuration_title": "Configuración",
-  "logout_title": "Desconectar"
+  "logout_title": "Desconectar",
+  "addboard_title": "Añadir tablero",
+  "title": "Titulo"
 }

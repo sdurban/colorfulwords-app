@@ -18,14 +18,15 @@ import { LoginPage } from '../pages/login/login';
 import {DashboardPage} from "../pages/dashboard/dashboard";
 import {SQLite} from "@ionic-native/sqlite";
 import {DatabaseService} from "../providers/DatabaseService";
-import {SQLiteMock} from "../mocks/SQLiteMock";
+import {AddBoardPage} from "../pages/dashboard/addBoard/addBoard";
 
 
 @NgModule({
   declarations: [
     ColorfullTalk,
     LoginPage,
-    DashboardPage
+    DashboardPage,
+    AddBoardPage
   ],
   imports: [
     BrowserModule,
@@ -44,7 +45,8 @@ import {SQLiteMock} from "../mocks/SQLiteMock";
   entryComponents: [
     ColorfullTalk,
     LoginPage,
-    DashboardPage
+    DashboardPage,
+    AddBoardPage
   ],
   providers: [
     StatusBar,
@@ -54,7 +56,7 @@ import {SQLiteMock} from "../mocks/SQLiteMock";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
     ServerProvider,
-    {provide: SQLite, useClass: SQLiteMock},
+    SQLite,
     DatabaseService
   ]
 })

@@ -13,5 +13,7 @@
   "items_title": "Items",
   "assets_title": "Assets",
   "configuration_title": "Configuration",
-  "logout_title": "Logout"
+  "logout_title": "Logout",
+  "addboard_title": "Add board",
+  "title": "Title"
 }

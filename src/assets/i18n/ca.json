@@ -13,5 +13,7 @@
   "items_title": "Objectes",
   "assets_title": "Fitxers",
   "configuration_title": "Configuració",
-  "logout_title": "Desconnectar"
+  "logout_title": "Desconnectar",
+  "addboard_title": "Afegir tauler",
+  "title": "Títol"
 }
