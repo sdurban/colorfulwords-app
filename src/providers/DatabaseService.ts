@@ -32,7 +32,7 @@ export class DatabaseService {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         id_server INTEGER,
         type CHAR(5),
-        name TEXT,
+        title TEXT,
         path TEXT
       );`
       ,{})
@@ -78,38 +78,111 @@ export class DatabaseService {
   }
 
   getAllFiles() {
-
+    return new Promise((resolve, reject) => {
+      this.database.executeSql("SELECT * FROM File ORDER BY name", {}).then(data => {
+        resolve(data);
+      }).catch(err => {
+        reject(err);
+      })
+    });
   }
 
   getAllBoards() {
-
+    return new Promise((resolve, reject) => {
+      this.database.executeSql("SELECT * FROM Board ORDER BY title", {}).then(data => {
+        resolve(data);
+      }).catch(err => {
+        reject(err);
+      })
+    })
   }
 
-  getFileBoards(board:number) {
+  getItemsBoard(board:number) {
+    return new Promise((resolve, reject) => {
+      this.database.executeSql("SELECT Items.* FROM BoardItems, Items WHERE Items.id = BoardItems.itemID AND BoardItems.boardID = ? ORDER BY BoardItems.position DESC", [board])
+        .then(data => {
+          resolve(data);
+        }).catch(err => {
+          reject(err);
+      })
+    })
+  }
 
+  getImage(item:number) {
+    return new Promise((resolve, reject) => {
+      this.database.executeSql("SELECT File.* FROM File, Items WHERE Items.id = ? AND Items.field1 = File.id", [item])
+        .then(data => {
+          resolve(data);
+        }).catch(err => {
+          reject(err);
+      })
+    });
   }
 
   getReferencedSound(item:number) {
-
+    return new Promise((resolve, reject) => {
+      this.database.executeSql("SELECT File.* FROM File, Items WHERE Items.id = ? AND Items.field2 = File.id", [item])
+        .then(data => {
+          resolve(data);
+        }).catch(err => {
+        reject(err);
+      })
+    });
   }
 
   createFile(name:string, path:string, type:string) {
-
+    return new Promise((resolve, reject) => {
+      this.database.executeSql("INSERT INTO File(id_server, type, name, path) VALUES (0, ?, ?, ?)", [type, name, path])
+        .then(() => {
+          resolve();
+        }).catch(err => {
+          reject();
+      })
+    })
   }
 
   createItem(id_photo:number, id_sound:number) {
-
+    return new Promise((resolve, reject) => {
+      this.database.executeSql("INSERT INTO Item(field1, field2) VALUES (?, ?)", [id_photo, id_sound])
+        .then(() => {
+          resolve();
+        }).catch(err => {
+          reject();
+      })
+    });
   }
+
 
   deleteItem(id_photo:number, id_sound:number) {
-
+    return new Promise((resolve, reject) => {
+      this.database.executeSql("DELETE FROM Item WHERE field1 = ? AND field2 = ?", [id_photo, id_sound])
+        .then(() => {
+          resolve();
+        }).catch((err) => {
+          reject(err);
+      })
+    })
   }
 
-  assignItemBoard(item:number) {
-
+  assignItemBoard(item:number, board:number, position:number) {
+    return new Promise((resolve, reject) => {
+      this.database.executeSql("INSERT INTO BoardsItem(boardID, itemID, position) VALUES (?, ?, ?)", [item, board, position])
+        .then(() => {
+          resolve();
+        }).catch((err) => {
+          reject(err);
+      })
+    })
   }
 
-  removeItemBoard(item:number) {
-
+  removeItemBoard(item:number, board:number) {
+    return new Promise((resolve, reject) => {
+      this.database.executeSql("DELETE FROM BoardsItem WHERE boardID = ? AND itemID = ?", [item, board])
+        .then(() => {
+          resolve();
+        }).catch((err) => {
+          reject(err);
+      })
+    });
   }
 }
