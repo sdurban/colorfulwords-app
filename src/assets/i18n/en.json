@@ -7,13 +7,16 @@
   "returnlogin_string": "I already have an account, return login",
   "loginloading_string": "Verifying account, wait a moment...",
   "loginerror_string": "Something is wrong with your account credentials, you can get support at https://colorfulwords.com",
-  "createaccount_string": "Se esta creado la cuenta, por favor espera unos instantes",
-  "registererror_string": "No ha sido posible crear la cuenta por favor intentalo mas tarde",
+  "createaccount_string": "Creating account, this may take a while...",
+  "registererror_string": "Something is wrong, please try again later",
   "boards_title": "Boards",
   "items_title": "Items",
   "assets_title": "Assets",
   "configuration_title": "Configuration",
   "logout_title": "Logout",
   "addboard_title": "Add board",
-  "title": "Title"
+  "title": "Title",
+  "board_loading": "Loading boards...",
+  "board_reloading": "Reloading...",
+  "add_board": "Add board"
 }

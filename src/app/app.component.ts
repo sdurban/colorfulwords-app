@@ -7,6 +7,7 @@ import { LoginPage } from '../pages/login/login';
 import { DashboardPage } from "../pages/dashboard/dashboard";
 import { Globalization } from '@ionic-native/globalization';
 import { Storage } from "@ionic/storage";
+import {KidProvider} from "../providers/KidProvider";
 
 @Component({
   templateUrl: 'app.html'
@@ -17,7 +18,7 @@ export class ColorfullTalk {
 
   pages: Array<{title: string, component: any, bottom:boolean}>;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, translate: TranslateService, globalization: Globalization, storage: Storage) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, translate: TranslateService, globalization: Globalization, storage: Storage, public modeApp: KidProvider) {
     this.setUpPages();
 
     platform.ready().then(() => {

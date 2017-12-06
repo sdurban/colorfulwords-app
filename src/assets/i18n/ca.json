@@ -15,5 +15,8 @@
   "configuration_title": "Configuració",
   "logout_title": "Desconnectar",
   "addboard_title": "Afegir tauler",
-  "title": "Títol"
+  "title": "Títol",
+  "board_loading": "Carregant taulers...",
+  "board_reloading": "Carregant ultims canvis...",
+  "add_board": "Afegir tauler"
 }

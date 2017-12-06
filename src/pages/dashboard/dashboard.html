@@ -1,35 +1,27 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button menuToggle *ngIf="modeApp.status == modeApp.ADULT_MODE">
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>{{ "boards_title" | translate }}</ion-title>
+    <ion-buttons end>
+      <button>
+        <img class="icon-bar" *ngIf="modeApp.status == modeApp.ADULT_MODE" (click)="modeApp.goKid()" src="assets/imgs/icons/kid-mode.svg">
+        <img class="icon-bar" *ngIf="modeApp.status == modeApp.KID_MODE" (click)="modeApp.goAdult()" src="assets/imgs/icons/adult-mode.svg">
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <div class="card-listing">
-    <ion-card>
-      <img src="assets/imgs/demo/badu-live.png"/>
-      <div class="card-title">São Paulo</div>
-    </ion-card>
-
-    <ion-card>
-      <img src="assets/imgs/demo/nin-live.png"/>
-      <div class="card-title">Amsterdam</div>
-    </ion-card>
-
-    <ion-card>
-      <img src="assets/imgs/demo/queen-live.png"/>
-      <div class="card-title">San Francisco</div>
-    </ion-card>
-
-    <ion-card>
-      <img src="assets/imgs/demo/rundmc-live.png"/>
-      <div class="card-title">Madison</div>
+    <ion-card *ngFor="let board of boards; let i = index" (click)="goBoard(board.id)">
+      <img *ngIf="board.main_image != null" src="{{ board.main_image }}"/>
+      <img *ngIf="board.main_image == null" src="assets/imgs/splash.png" />
+      <div class="card-title">{{ board.title }}</div>
     </ion-card>
   </div>
   <ion-fab bottom right>
-    <button ion-fab (click)="addBoard()"><ion-icon name="add"></ion-icon></button>
+    <button *ngIf="modeApp.status == modeApp.ADULT_MODE" ion-fab (click)="addBoard()"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
 </ion-content>

@@ -1,6 +1,5 @@
 @import "../theme/variables";
 ion-menu {
-
   .logo {
     width: 75%;
     margin-left: 12.5%;
@@ -22,12 +21,23 @@ ion-menu {
   }
 }
 ion-navbar {
+  color: white;
   ion-icon {
     color: map_get($colors, amarillo);
   }
   .toolbar-background {
     background-color: map_get($colors, secondary);
     color: white;
+  }
+  .icon-bar {
+    color: black;
+    width: 30px;
+    @if($navbar-ios-height) {
+      max-height: $navbar-ios-height - 10px;
+    }
+    @if($navbar-md-height) {
+      max-height: $navbar-md-height - 10px;
+    }
   }
 }
 

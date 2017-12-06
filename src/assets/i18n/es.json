@@ -7,13 +7,16 @@
   "returnlogin_string": "Ya tengo una cuenta, volver a login",
   "loginloading_string": "Verificando tus credenciales, un momento por favor...",
   "loginerror_string": "Hay algun error con los datos de cuenta tu cuenta, puedes visitar https://colorfulwords.com",
-  "createaccount_string": "Creating account, this may take a while...",
-  "registererror_string": "Something is wrong, please try again later",
+  "createaccount_string": "Se esta creado la cuenta, por favor espera unos instantes",
+  "registererror_string": "No ha sido posible crear la cuenta por favor intentalo mas tarde",
   "boards_title": "Tableros",
   "items_title": "Objetos",
   "assets_title": "Ficheros",
   "configuration_title": "Configuración",
   "logout_title": "Desconectar",
   "addboard_title": "Añadir tablero",
-  "title": "Titulo"
+  "title": "Titulo",
+  "board_loading": "Cargando tableros...",
+  "board_reloading": "Cargando ultimos cambios...",
+  "add_board": "Añadir tablero"
 }

@@ -92,17 +92,33 @@ export class DatabaseService {
 
   getAllBoards() {
     return this.isReady().then(() => {
-      this.database.executeSql("SELECT * FROM Board ORDER BY title", {}).then(data => {
-        return data;
+      return this.database.executeSql("SELECT Board.*, File.path FROM Board" +
+        " LEFT JOIN BoardItems ON BoardItems.boardID = Board.id AND position = 0" +
+        " LEFT JOIN Item ON Item.id = BoardItems.itemID" +
+        " LEFT JOIN File ON Item.field1 = File.id" +
+        " ORDER BY title", {}).then(data => {
+        let boards:Board[] = [];
+
+        for(let i=0; i< data.rows.length; i++){
+          let item:Board = <Board>{};
+          item.id = data.rows.item(i).id;
+          item.dimension = data.rows.item(i).dimension;
+          item.title = data.rows.item(i).title;
+          item.main_image = data.rows.item(i).path;
+
+          boards.push(item);
+        }
+
+        return boards;
       }).catch(err => {
         return err;
-      })
+      });
     })
   }
 
   getItemsBoard(board:number) {
     return this.isReady().then(() => {
-      this.database.executeSql("SELECT Items.* FROM BoardItems, Items WHERE Items.id = BoardItems.itemID AND BoardItems.boardID = ? ORDER BY BoardItems.position DESC", [board])
+      return this.database.executeSql("SELECT Item.* FROM BoardItems, Item WHERE Item.id = BoardItems.itemID AND BoardItems.boardID = ? ORDER BY BoardItems.position DESC", [board])
         .then(data => {
           return data
         }).catch(err => {
@@ -113,7 +129,7 @@ export class DatabaseService {
 
   getImage(item:number) {
     return this.isReady().then(() => {
-      this.database.executeSql("SELECT File.* FROM File, Items WHERE Items.id = ? AND Items.field1 = File.id", [item])
+      return this.database.executeSql("SELECT File.* FROM File, Item WHERE Item.id = ? AND Item.field1 = File.id", [item])
         .then(data => {
           return data
         }).catch(err => {
@@ -124,7 +140,7 @@ export class DatabaseService {
 
   getReferencedSound(item:number) {
     return this.isReady().then(() => {
-      this.database.executeSql("SELECT File.* FROM File, Items WHERE Items.id = ? AND Items.field2 = File.id", [item])
+      return this.database.executeSql("SELECT File.* FROM File, Item WHERE Item.id = ? AND Item.field2 = File.id", [item])
         .then(data => {
           return data
         }).catch(err => {
@@ -135,7 +151,7 @@ export class DatabaseService {
 
   createFile(name:string, path:string, type:string) {
     return this.isReady().then(() => {
-      this.database.executeSql("INSERT INTO File(id_server, type, name, path) VALUES (0, ?, ?, ?)", [type, name, path])
+      return this.database.executeSql("INSERT INTO File(id_server, type, name, path) VALUES (0, ?, ?, ?)", [type, name, path])
         .then(() => {
           return true;
         }).catch(err => {
@@ -146,7 +162,7 @@ export class DatabaseService {
 
   createItem(id_photo:number, id_sound:number) {
     return this.isReady().then(() => {
-      this.database.executeSql("INSERT INTO Item(field1, field2) VALUES (?, ?)", [id_photo, id_sound])
+      return this.database.executeSql("INSERT INTO Item(field1, field2) VALUES (?, ?)", [id_photo, id_sound])
         .then(() => {
           return true;
         }).catch(err => {
@@ -157,7 +173,7 @@ export class DatabaseService {
 
   createBoard(title:string, dimension:number) {
     return this.isReady().then(() => {
-      this.database.executeSql("INSERT INTO Board(title, dimension) VALUES (?, ?)", [title, dimension])
+      return this.database.executeSql("INSERT INTO Board(title, dimension) VALUES (?, ?)", [title, dimension])
         .then(() => {
           return true;
         }).catch(err => {
@@ -169,7 +185,7 @@ export class DatabaseService {
 
   deleteItem(id_photo:number, id_sound:number) {
     return this.isReady().then(() => {
-      this.database.executeSql("DELETE FROM Item WHERE field1 = ? AND field2 = ?", [id_photo, id_sound])
+      return this.database.executeSql("DELETE FROM Item WHERE field1 = ? AND field2 = ?", [id_photo, id_sound])
         .then(() => {
           return true;
         }).catch((err) => {
@@ -180,7 +196,7 @@ export class DatabaseService {
 
   assignItemBoard(item:number, board:number, position:number) {
     return this.isReady().then(() => {
-      this.database.executeSql("INSERT INTO BoardsItem(boardID, itemID, position) VALUES (?, ?, ?)", [item, board, position])
+      return this.database.executeSql("INSERT INTO BoardsItem(boardID, itemID, position) VALUES (?, ?, ?)", [item, board, position])
         .then(() => {
           return true;
         }).catch((err) => {
@@ -191,7 +207,7 @@ export class DatabaseService {
 
   removeItemBoard(item:number, board:number) {
     return this.isReady().then(() => {
-      this.database.executeSql("DELETE FROM BoardsItem WHERE boardID = ? AND itemID = ?", [item, board])
+      return this.database.executeSql("DELETE FROM BoardsItem WHERE boardID = ? AND itemID = ?", [item, board])
         .then(() => {
           return true;
         }).catch((err) => {

@@ -19,11 +19,15 @@ import {DashboardPage} from "../pages/dashboard/dashboard";
 import {SQLite} from "@ionic-native/sqlite";
 import {DatabaseService} from "../providers/DatabaseService";
 import {AddBoardPage} from "../pages/dashboard/addBoard/addBoard";
+import {LoadingProvider} from "../providers/loadingprovider";
+import {CapitalizeFirstPipe} from "../pipes/capitalize";
+import {KidProvider} from "../providers/KidProvider";
 
 
 @NgModule({
   declarations: [
     ColorfullTalk,
+    CapitalizeFirstPipe,
     LoginPage,
     DashboardPage,
     AddBoardPage
@@ -57,7 +61,9 @@ import {AddBoardPage} from "../pages/dashboard/addBoard/addBoard";
     AuthService,
     ServerProvider,
     SQLite,
-    DatabaseService
+    DatabaseService,
+    LoadingProvider,
+    KidProvider
   ]
 })
 export class AppModule {}
