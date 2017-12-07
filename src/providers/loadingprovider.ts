@@ -1,20 +1,21 @@
-import {Injectable} from "@angular/core";
+import {Injectable, ViewChild} from "@angular/core";
 import {TranslateService} from "@ngx-translate/core";
-import {App, Config, Loading, LoadingController} from "ionic-angular";
+import {App, Config, Loading, LoadingController, Nav} from "ionic-angular";
 
 @Injectable()
-export class LoadingProvider extends LoadingController {
+export class LoadingProvider {
+  @ViewChild(App) _app: App;
+  @ViewChild(Config) config: Config;
+  @ViewChild(Nav) nav: Nav;
   loading: Loading;
 
-  public constructor(_app: App, config: Config, public translate: TranslateService) {
-    super(_app, config);
-  }
+  public constructor(public translate: TranslateService, public loadingCtrl: LoadingController) {}
 
   show(message) {
     return new Promise(resolve => {
       this.translate.get(message).subscribe(
         value => {
-          this.loading = this.create({
+          this.loading = this.loadingCtrl.create({
             content: value,
             dismissOnPageChange: true
           });

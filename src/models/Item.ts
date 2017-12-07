@@ -1,5 +1,7 @@
 interface Item {
   id: number,
-  image: File,
-  sound: File
+  title: string,
+  imagePath: string,
+  soundPath: string,
+  order: number
 }

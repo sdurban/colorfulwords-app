@@ -22,6 +22,11 @@ import {AddBoardPage} from "../pages/dashboard/addBoard/addBoard";
 import {LoadingProvider} from "../providers/loadingprovider";
 import {CapitalizeFirstPipe} from "../pipes/capitalize";
 import {KidProvider} from "../providers/KidProvider";
+import {FileTransfer} from "@ionic-native/file-transfer";
+import {ItemsPage} from "../pages/items/items";
+import {ImagePage} from "../pages/files/image/image";
+import {SoundPage} from "../pages/files/sound/sound";
+import {FilesPage} from "../pages/files/files";
 
 
 @NgModule({
@@ -30,7 +35,11 @@ import {KidProvider} from "../providers/KidProvider";
     CapitalizeFirstPipe,
     LoginPage,
     DashboardPage,
-    AddBoardPage
+    AddBoardPage,
+    ItemsPage,
+    ImagePage,
+    SoundPage,
+    FilesPage
   ],
   imports: [
     BrowserModule,
@@ -57,6 +66,8 @@ import {KidProvider} from "../providers/KidProvider";
     SplashScreen,
     Globalization,
     Device,
+    File,
+    FileTransfer,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
     ServerProvider,

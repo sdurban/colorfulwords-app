@@ -56,6 +56,7 @@ export class DatabaseService {
           this.database.executeSql(
             `CREATE TABLE IF NOT EXISTS Item (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT,
         field1 INTEGER,
         field2 INTEGER,
         FOREIGN KEY(field1) REFERENCES File(id),
@@ -82,11 +83,14 @@ export class DatabaseService {
     });
   }
 
-  getAllFiles() {
+  createBoard(title:string, dimension:number) {
     return this.isReady().then(() => {
-      return this.database.executeSql("SELECT * FROM File ORDER BY name", {}).then(data => {
-        return data;
-      });
+      return this.database.executeSql("INSERT INTO Board(title, dimension) VALUES (?, ?)", [title, dimension])
+        .then(() => {
+          return true;
+        }).catch(err => {
+          return false;
+        })
     });
   }
 
@@ -118,44 +122,29 @@ export class DatabaseService {
 
   getItemsBoard(board:number) {
     return this.isReady().then(() => {
-      return this.database.executeSql("SELECT Item.* FROM BoardItems, Item WHERE Item.id = BoardItems.itemID AND BoardItems.boardID = ? ORDER BY BoardItems.position DESC", [board])
+      return this.database.executeSql("SELECT Item.id, Item.title, FileImg.path as imgpath, FileSound.path as soundpath, BoardItems.position FROM  " +
+        "BoardItems " +
+        "LEFT JOIN Item ON BoardItems.itemID = Item.id " +
+        "LEFT JOIN File AS FileImg ON Item.field1 = FileImg.id " +
+        "LEFT JOIN File AS FileSound ON Item.field2 = FileSound.id " +
+        "WHERE BoardItems.boardID = ? " +
+        "ORDER BY BoardItems.position DESC", [board])
         .then(data => {
-          return data
+          let items:Item[] = [];
+
+          for(let i=0; i < data.rows.length; i++) {
+            let item:Item = <Item>{};
+
+            item.id = data.rows.item(i).id;
+            item.title = data.rows.item(i).title;
+            item.imagePath = data.rows.item(i).imgpath;
+            item.soundPath = data.rows.item(i).soundpath;
+            item.order = data.rows.item(i).position;
+          }
+
+          return items;
         }).catch(err => {
           return err
-      })
-    })
-  }
-
-  getImage(item:number) {
-    return this.isReady().then(() => {
-      return this.database.executeSql("SELECT File.* FROM File, Item WHERE Item.id = ? AND Item.field1 = File.id", [item])
-        .then(data => {
-          return data
-        }).catch(err => {
-          return err
-      })
-    });
-  }
-
-  getReferencedSound(item:number) {
-    return this.isReady().then(() => {
-      return this.database.executeSql("SELECT File.* FROM File, Item WHERE Item.id = ? AND Item.field2 = File.id", [item])
-        .then(data => {
-          return data
-        }).catch(err => {
-        return err
-      })
-    });
-  }
-
-  createFile(name:string, path:string, type:string) {
-    return this.isReady().then(() => {
-      return this.database.executeSql("INSERT INTO File(id_server, type, name, path) VALUES (0, ?, ?, ?)", [type, name, path])
-        .then(() => {
-          return true;
-        }).catch(err => {
-          return false;
       })
     })
   }
@@ -167,18 +156,7 @@ export class DatabaseService {
           return true;
         }).catch(err => {
           return false;
-      })
-    });
-  }
-
-  createBoard(title:string, dimension:number) {
-    return this.isReady().then(() => {
-      return this.database.executeSql("INSERT INTO Board(title, dimension) VALUES (?, ?)", [title, dimension])
-        .then(() => {
-          return true;
-        }).catch(err => {
-        return false;
-      })
+        })
     });
   }
 
@@ -190,6 +168,59 @@ export class DatabaseService {
           return true;
         }).catch((err) => {
           return err
+        })
+    })
+  }
+
+  getAllImages() {
+    return this.isReady().then(() => {
+      return this.database.executeSql("SELECT * FROM File WHERE type = 'IMAGE' ORDER BY name", {}).then(data => {
+        let items:File[] = [];
+
+        for(let i=0; i < data.rows.length; i++) {
+          let item:File = <File>{};
+
+          item.id = data.rows.item(i).id;
+          item.title = data.rows.item(i).title;
+          item.path = data.rows.item(i).path;
+          item.type = data.rows.item(i).type;
+
+          items.push(item);
+        }
+
+        return items;
+      });
+    });
+  }
+
+  getAllSounds() {
+    return this.isReady().then(() => {
+      return this.database.executeSql("SELECT * FROM File WHERE type = 'SOUND' ORDER BY name", {}).then(data => {
+        let items:File[] = [];
+
+        for(let i=0; i < data.rows.length; i++) {
+          let item:File = <File>{};
+
+          item.id = data.rows.item(i).id;
+          item.title = data.rows.item(i).title;
+          item.path = data.rows.item(i).path;
+          item.type = data.rows.item(i).type;
+
+          items.push(item);
+        }
+
+        return items;
+      });
+    });
+  }
+
+  createFile(name:string, path:string, type:string) {
+    return this.isReady().then(() => {
+      return this.database.executeSql("INSERT INTO File(id_server, type, name, path) VALUES (0, ?, ?, ?)", [type, name, path])
+        .then(() => {
+          return true;
+        }).catch(err => {
+          return false;
       })
     })
   }

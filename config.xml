@@ -87,4 +87,7 @@
     <plugin name="cordova-plugin-globalization" spec="^1.0.8" />
     <plugin name="cordova-plugin-statusbar" spec="^2.3.0" />
     <plugin name="cordova-plugin-camera" spec="^3.0.0" />
+    <plugin name="cordova-plugin-file" spec="^5.0.0" />
+    <plugin name="cordova-plugin-file-transfer" spec="^1.7.0" />
+    <plugin name="cordova-plugin-media" spec="^4.0.0" />
 </widget>

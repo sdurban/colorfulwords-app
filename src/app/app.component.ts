@@ -8,6 +8,7 @@ import { DashboardPage } from "../pages/dashboard/dashboard";
 import { Globalization } from '@ionic-native/globalization';
 import { Storage } from "@ionic/storage";
 import {KidProvider} from "../providers/KidProvider";
+import {FilesPage} from "../pages/files/files";
 
 @Component({
   templateUrl: 'app.html'
@@ -34,10 +35,9 @@ export class ColorfullTalk {
   setUpPages() {
     this.pages = [
       { title: 'boards_title', component: DashboardPage, bottom: false},
-      { title: 'items_title', component: DashboardPage, bottom: false},
-      { title: 'assets_title', component: DashboardPage, bottom: false},
+      { title: 'assets_title', component: FilesPage, bottom: false},
       { title: 'configuration_title', component: DashboardPage, bottom: false},
-      { title: 'logout_title', component: DashboardPage, bottom: true},
+      { title: 'logout_title', component: LoginPage, bottom: true},
     ];
   }
 
