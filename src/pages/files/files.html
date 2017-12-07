@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ "files" | translate | capitalizeFirst }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="card-selection-half">
+    <ion-card (click)="goSound()">
+      <ion-card-header>
+        <ion-icon ios="ios-musical-notes" md="md-musical-notes"></ion-icon> <br />
+        {{ "sounds" | translate | capitalizeFirst }}
+      </ion-card-header>
+    </ion-card>
+    <ion-card (click)="goImage()">
+      <ion-card-header>
+        <ion-icon ios="ios-images" md="md-images"></ion-icon> <br />
+        {{ "images" | translate | capitalizeFirst }}
+      </ion-card-header>
+    </ion-card>
+  </div>
+</ion-content>

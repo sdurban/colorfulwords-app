@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ "addsound_title" | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form class="form">
+    <ion-row>
+      <ion-col>
+        <ion-list inset>
+          <ion-item>
+            <ion-input type="text" placeholder="{{ 'titulo' | translate | capitalizeFirst }}" name="title" [(ngModel)]="file.title" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <div *ngIf="!recording" (click)="recordSound()" style="text-align: center;"><ion-icon ios="ios-recording" md="md-recording"></ion-icon>&nbsp;{{ "record_sound" | translate | capitalizeFirst }}</div>
+            <div *ngIf="recording" (click)="stoprecordSound()" style="text-align: center;"><ion-icon ios="ios-pause" md="md-pause"></ion-icon>&nbsp;{{ "stop_record_sound" | translate | capitalizeFirst }}</div>
+          </ion-item>
+          <ion-item *ngIf="file.path != '' && file.path != null">
+            <div (click)="playSound()"  style="text-align: center;"><ion-icon ios="ios-play" md="md-play"></ion-icon>&nbsp;{{ "play_sound" | translate | capitalizeFirst }}</div>
+          </ion-item>
+          <ion-item>
+            <button ion-button round full color="primary" (click)="createSound()">&nbsp;{{ "add_sound" | translate }}</button>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

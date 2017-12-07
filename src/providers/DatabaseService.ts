@@ -149,6 +149,17 @@ export class DatabaseService {
     })
   }
 
+  deleteFile(id:number) {
+    return this.isReady().then(() => {
+      return this.database.executeSql("DELETE FROM File WHERE id = ?", [id])
+        .then(() => {
+          return true;
+        }).catch(err => {
+          return false;
+        })
+    })
+  }
+
   createItem(id_photo:number, id_sound:number) {
     return this.isReady().then(() => {
       return this.database.executeSql("INSERT INTO Item(field1, field2) VALUES (?, ?)", [id_photo, id_sound])
@@ -174,7 +185,7 @@ export class DatabaseService {
 
   getAllImages() {
     return this.isReady().then(() => {
-      return this.database.executeSql("SELECT * FROM File WHERE type = 'IMAGE' ORDER BY name", {}).then(data => {
+      return this.database.executeSql("SELECT * FROM File WHERE type = 'IMAGE' ORDER BY title", {}).then(data => {
         let items:File[] = [];
 
         for(let i=0; i < data.rows.length; i++) {
@@ -195,7 +206,7 @@ export class DatabaseService {
 
   getAllSounds() {
     return this.isReady().then(() => {
-      return this.database.executeSql("SELECT * FROM File WHERE type = 'SOUND' ORDER BY name", {}).then(data => {
+      return this.database.executeSql("SELECT * FROM File WHERE type = 'SOUND' ORDER BY title", {}).then(data => {
         let items:File[] = [];
 
         for(let i=0; i < data.rows.length; i++) {
@@ -216,7 +227,7 @@ export class DatabaseService {
 
   createFile(name:string, path:string, type:string) {
     return this.isReady().then(() => {
-      return this.database.executeSql("INSERT INTO File(id_server, type, name, path) VALUES (0, ?, ?, ?)", [type, name, path])
+      return this.database.executeSql("INSERT INTO File(id_server, type, title, path) VALUES (0, ?, ?, ?)", [type, name, path])
         .then(() => {
           return true;
         }).catch(err => {

@@ -18,5 +18,13 @@
   "title": "Títol",
   "board_loading": "Carregant taulers...",
   "board_reloading": "Carregant ultims canvis...",
-  "add_board": "Afegir tauler"
+  "add_board": "Afegir tauler",
+  "files": "fitxers",
+  "sounds": "sons",
+  "images": "imatges",
+  "add_sound": "Afegir so",
+  "record_sound": "Gravar so",
+  "stop_record_sound": "Detenir gravació",
+  "play_sound": "Reproduir so",
+  "addsound_title": "Afegir so"
 }

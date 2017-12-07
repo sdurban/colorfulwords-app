@@ -17,7 +17,7 @@ export class ItemsPage {
     this.items = [];
     this.boardID = navParams.get('boardID');
     this.titleBoard = navParams.get('titleBoard');
-    this.loading.show('').then(() => {
+    this.loading.show('loading_items').then(() => {
       this.loadItems(this.boardID).then(() => {
         this.loading.dismiss();
       });

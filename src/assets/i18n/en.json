@@ -18,5 +18,13 @@
   "title": "Title",
   "board_loading": "Loading boards...",
   "board_reloading": "Reloading...",
-  "add_board": "Add board"
+  "add_board": "Add board",
+  "files": "files",
+  "sounds": "sounds",
+  "images": "images",
+  "add_sound": "Add sound",
+  "record_sound": "Record sound",
+  "stop_record_sound": "Stop recording",
+  "play_sound": "Play sound",
+  "addsound_title": "Add sound"
 }

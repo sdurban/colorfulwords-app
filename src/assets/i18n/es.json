@@ -18,5 +18,13 @@
   "title": "Titulo",
   "board_loading": "Cargando tableros...",
   "board_reloading": "Cargando ultimos cambios...",
-  "add_board": "Añadir tablero"
+  "add_board": "Añadir tablero",
+  "files": "ficheros",
+  "sounds": "sonidos",
+  "images": "imagenes",
+  "add_sound": "Añadir sonido",
+  "record_sound": "Grabar sonido",
+  "stop_record_sound": "Detener grabación",
+  "play_sound": "Reproducir sonido",
+  "addsound_title": "Añadir sonido"
 }

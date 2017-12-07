@@ -27,6 +27,9 @@ import {ItemsPage} from "../pages/items/items";
 import {ImagePage} from "../pages/files/image/image";
 import {SoundPage} from "../pages/files/sound/sound";
 import {FilesPage} from "../pages/files/files";
+import {File} from "@ionic-native/file";
+import {AddSoundPage} from "../pages/files/sound/addSound/addSound";
+import {Media} from "@ionic-native/media";
 
 
 @NgModule({
@@ -39,7 +42,8 @@ import {FilesPage} from "../pages/files/files";
     ItemsPage,
     ImagePage,
     SoundPage,
-    FilesPage
+    FilesPage,
+    AddSoundPage
   ],
   imports: [
     BrowserModule,
@@ -59,7 +63,12 @@ import {FilesPage} from "../pages/files/files";
     ColorfullTalk,
     LoginPage,
     DashboardPage,
-    AddBoardPage
+    AddBoardPage,
+    ItemsPage,
+    ImagePage,
+    SoundPage,
+    FilesPage,
+    AddSoundPage
   ],
   providers: [
     StatusBar,
@@ -68,6 +77,7 @@ import {FilesPage} from "../pages/files/files";
     Device,
     File,
     FileTransfer,
+    Media,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
     ServerProvider,

@@ -23,7 +23,6 @@ export class DashboardPage {
 
   addBoard() {
     let addBoardModal = this.modalCtrl.create(AddBoardPage);
-
     addBoardModal.present().then(() => {
       this.loading.show('board_reloading').then(() => {
         this.loadBoards().then(() => {
