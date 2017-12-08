@@ -30,6 +30,9 @@ import {FilesPage} from "../pages/files/files";
 import {File} from "@ionic-native/file";
 import {AddSoundPage} from "../pages/files/sound/addSound/addSound";
 import {Media} from "@ionic-native/media";
+import {Camera} from "@ionic-native/camera";
+import {AddImagePage} from "../pages/files/image/addImage/addImage";
+import {FilePath} from "@ionic-native/file-path";
 
 
 @NgModule({
@@ -43,7 +46,8 @@ import {Media} from "@ionic-native/media";
     ImagePage,
     SoundPage,
     FilesPage,
-    AddSoundPage
+    AddSoundPage,
+    AddImagePage
   ],
   imports: [
     BrowserModule,
@@ -68,7 +72,8 @@ import {Media} from "@ionic-native/media";
     ImagePage,
     SoundPage,
     FilesPage,
-    AddSoundPage
+    AddSoundPage,
+    AddImagePage
   ],
   providers: [
     StatusBar,
@@ -78,6 +83,8 @@ import {Media} from "@ionic-native/media";
     File,
     FileTransfer,
     Media,
+    Camera,
+    FilePath,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
     ServerProvider,

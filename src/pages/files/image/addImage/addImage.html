@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ "addimage_title" | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form class="form">
+    <ion-row>
+      <ion-col>
+        <ion-list inset>
+          <ion-item>
+            <ion-input type="text" placeholder="{{ 'title' | translate | capitalizeFirst }}" name="title" [(ngModel)]="file.title" required></ion-input>
+          </ion-item>
+          <ion-item>
+             <div (click)="takePicture(camera.PictureSourceType.CAMERA)" style="text-align: center;"><ion-icon ios="ios-camera" md="md-camera"></ion-icon>&nbsp;{{ "take_picture" | translate | capitalizeFirst }}</div>
+          </ion-item>
+          <ion-item>
+            <div (click)="takePicture(camera.PictureSourceType.PHOTOLIBRARY)" style="text-align: center;"><ion-icon ios="ios-images" md="md-images"></ion-icon>&nbsp;{{ "take_picture_library" | translate | capitalizeFirst }}</div>
+          </ion-item>
+          <ion-item *ngIf="file.path != '' && file.path != null">
+            <img [src]="fullImagePath(file.path)" />
+          </ion-item>
+          <ion-item>
+            <button ion-button round full color="primary" (click)="createPicture()">&nbsp;{{ "add_picture" | translate }}</button>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

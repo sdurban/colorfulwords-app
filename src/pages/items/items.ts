@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { DatabaseService} from "../../providers/DatabaseService";
-import {ModalController, NavParams} from "ionic-angular";
+import {ModalController, Nav, NavParams} from "ionic-angular";
 import {LoadingProvider} from "../../providers/loadingprovider";
 import {KidProvider} from "../../providers/KidProvider";
+import {AddItemsPage} from "./addItem/addItem";
 
 @Component({
   selector: 'page-item',
@@ -13,7 +14,7 @@ export class ItemsPage {
   titleBoard: string;
   items:Array<Item>;
 
-  constructor(public database: DatabaseService, public modalCtrl: ModalController, public loading: LoadingProvider, public modeApp: KidProvider, public navParams: NavParams) {
+  constructor(public database: DatabaseService, public modalCtrl: ModalController, public loading: LoadingProvider, public modeApp: KidProvider, public navParams: NavParams, public nav: Nav) {
     this.items = [];
     this.boardID = navParams.get('boardID');
     this.titleBoard = navParams.get('titleBoard');
@@ -34,7 +35,9 @@ export class ItemsPage {
   }
 
   addItem() {
-
+    this.nav.push(AddItemsPage, {'boardID': this.boardID}).then(() => {
+      this.loadItems(this.boardID);
+    });
   }
 }
 

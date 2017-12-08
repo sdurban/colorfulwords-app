@@ -81,3 +81,68 @@ ion-content {
     }
   }
 }
+
+.nopadding {
+  .scroll-content {
+    padding: 0 !important;
+  }
+  .boardStyle {
+    display: flex;
+    flex-wrap: wrap;
+    ion-card {
+      position: relative;
+      margin: 0;
+      background-size: contain;
+      width: 33.33vw;
+      background-repeat: no-repeat;
+      background-position-y: 35%;
+      background-color: map_get($colors, 'gris');
+      @if($navbar-ios-height) {
+        height: calc(50vh - #{$navbar-ios-height}/2);
+      }
+      @if($navbar-md-height) {
+        height: calc(50vh - #{$navbar-md-height}/2);
+      }
+      @media only screen
+      and (min-device-width: 768px)
+      and (max-device-width: 1024px)
+      and (orientation: portrait)
+      and (-webkit-min-device-pixel-ratio: 1) {
+        width: 50vw;
+        @if($navbar-ios-height) {
+          height: calc(33.33vh - #{$navbar-ios-height}/3);
+        }
+        @if($navbar-md-height) {
+          height: calc(33.33vh - #{$navbar-md-height}/3);
+        }
+        background-position-y: 0;
+        background-size: cover;
+      }
+      @media only screen
+      and (min-device-width: 320px)
+      and (max-device-width: 480px)
+      and (orientation: portrait) {
+        width: calc(100vw);
+      }
+      .card-title {
+        position: absolute;
+        bottom: 0;
+        background-color: map_get($colors, light);
+        display: block;
+        width: 100%;
+        height: 10%;
+        text-align: center;
+        font-size: 1.2em;
+      }
+      button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 7vw;
+        height: 7vw;
+        background-color:rgba(255, 255, 255, 1);
+        font-size:2.6vw
+      }
+    }
+  }
+}

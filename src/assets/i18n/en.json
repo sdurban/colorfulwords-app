@@ -26,5 +26,11 @@
   "record_sound": "Record sound",
   "stop_record_sound": "Stop recording",
   "play_sound": "Play sound",
-  "addsound_title": "Add sound"
+  "addsound_title": "Add sound",
+  "sound_library": "Sound Library",
+  "image_library": "Image Library",
+  "addimage_title": "Add Image",
+  "take_picture": "Take a picture from camera",
+  "take_picture_library": "Take a picture from library",
+  "add_picture": "Add picture"
 }

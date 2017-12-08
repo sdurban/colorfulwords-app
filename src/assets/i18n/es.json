@@ -26,5 +26,11 @@
   "record_sound": "Grabar sonido",
   "stop_record_sound": "Detener grabación",
   "play_sound": "Reproducir sonido",
-  "addsound_title": "Añadir sonido"
+  "addsound_title": "Añadir sonido",
+  "sound_library": "Librería de sonidos",
+  "image_library": "Librería de imagenes",
+  "addimage_title": "Añadir una imagen",
+  "take_picture": "Hacer una foto",
+  "take_picture_library": "Foto de la libreria de imagenes",
+  "add_picture": "Añadir imagen"
 }

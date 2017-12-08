@@ -10,7 +10,7 @@
       <ion-col>
         <ion-list inset>
           <ion-item>
-            <ion-input type="text" placeholder="{{ 'titulo' | translate | capitalizeFirst }}" name="title" [(ngModel)]="file.title" required></ion-input>
+            <ion-input type="text" placeholder="{{ 'title' | translate | capitalizeFirst }}" name="title" [(ngModel)]="file.title" required></ion-input>
           </ion-item>
           <ion-item>
             <div *ngIf="!recording" (click)="recordSound()" style="text-align: center;"><ion-icon ios="ios-recording" md="md-recording"></ion-icon>&nbsp;{{ "record_sound" | translate | capitalizeFirst }}</div>

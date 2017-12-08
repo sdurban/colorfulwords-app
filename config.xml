@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.colorfulltalk.app" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.colorfultalk.app" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>ColorfulTalk</name>
     <description>Augmentative Talk APP</description>
     <author email="sergio@durban.cat" href="http://colorfultalk.com/">Sergio Durban Belmonte</author>
@@ -78,6 +78,7 @@
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
     <engine name="ios" spec="^4.5.4" />
+    <engine name="osx" spec="4.0.1" />
     <plugin name="cordova-sqlite-storage" spec="^2.1.2" />
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
@@ -90,4 +91,5 @@
     <plugin name="cordova-plugin-file" spec="^5.0.0" />
     <plugin name="cordova-plugin-file-transfer" spec="^1.7.0" />
     <plugin name="cordova-plugin-media" spec="^4.0.0" />
+    <plugin name="cordova-plugin-filepath" spec="^1.1.0" />
 </widget>

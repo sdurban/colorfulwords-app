@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Nav} from "ionic-angular";
+import {Nav, NavParams} from "ionic-angular";
 import {SoundPage} from "./sound/sound";
 import {ImagePage} from "./image/image";
 
@@ -8,7 +8,7 @@ import {ImagePage} from "./image/image";
   templateUrl: 'files.html'
 })
 export class FilesPage {
-  constructor(public nav: Nav) { }
+  constructor(public nav: Nav, public navParams: NavParams) { }
 
   goSound() {
     this.nav.push(SoundPage);

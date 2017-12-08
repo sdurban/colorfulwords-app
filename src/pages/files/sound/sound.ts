@@ -27,11 +27,7 @@ export class SoundPage {
   addSound() {
     let addSoundModal = this.modalCtrl.create(AddSoundPage, {}, {"enableBackdropDismiss": false});
     addSoundModal.present().then(() => {
-      this.loading.show('board_reloading').then(() => {
-        this.loadSound().then(() => {
-          this.loading.dismiss();
-        });
-      });
+      this.loadSound();
     });
   }
 

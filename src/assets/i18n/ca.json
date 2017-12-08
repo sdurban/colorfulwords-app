@@ -26,5 +26,11 @@
   "record_sound": "Gravar so",
   "stop_record_sound": "Detenir gravació",
   "play_sound": "Reproduir so",
-  "addsound_title": "Afegir so"
+  "addsound_title": "Afegir so",
+  "sound_library": "Llibreria de sons",
+  "image_library": "Llibreria d'imatges",
+  "addimage_title": "Afegir una imatge",
+  "take_picture": "Fer una foto",
+  "take_picture_library": "Agafar la foto de la llibreria d'imatges",
+  "add_picture": "Afegir imatge"
 }
