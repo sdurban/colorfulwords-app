@@ -96,6 +96,7 @@ ion-content {
       width: 33.33vw;
       background-repeat: no-repeat;
       background-position-y: 35%;
+      background-position-x: 50%;
       background-color: map_get($colors, 'gris');
       @if($navbar-ios-height) {
         height: calc(50vh - #{$navbar-ios-height}/2);

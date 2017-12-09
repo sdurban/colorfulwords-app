@@ -3,7 +3,7 @@
     <button ion-button menuToggle *ngIf="modeApp.status == modeApp.ADULT_MODE">
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{ board.title }}</ion-title>
+    <ion-title>{{ titleBoard }}</ion-title>
     <ion-buttons end>
       <button>
         <img class="icon-bar" *ngIf="modeApp.status == modeApp.ADULT_MODE" (click)="modeApp.goKid()" src="assets/imgs/icons/kid-mode.svg">
@@ -13,8 +13,14 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="nopadding">
+  <div class="boardStyle">
+    <ion-card *ngFor="let item of items; let i = index" [style.background-image]="'url('+getFullPathImage(item.imagePath)+')'" (click)="playSound(item.soundPath)">
+      <div class="card-title">{{ item.title }}</div>
+      <button *ngIf="modeApp.status == modeApp.ADULT_MODE" (click)="removeItemBoard(item.id)"><ion-icon ios="ios-trash" md="md-trash"></ion-icon></button>
+    </ion-card>
+  </div>
   <ion-fab bottom right>
-    <button *ngIf="modeApp.status == modeApp.ADULT_MODE" ion-fab (click)="addItem(board.id)"><ion-icon name="add"></ion-icon></button>
+    <button *ngIf="modeApp.status == modeApp.ADULT_MODE" ion-fab (click)="addItem(boardID)"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
 </ion-content>

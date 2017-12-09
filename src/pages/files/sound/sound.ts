@@ -1,38 +1,49 @@
-import { Component } from '@angular/core';
-import {ModalController, Nav, NavParams} from "ionic-angular";
+import {Component, NgZone} from '@angular/core';
+import {ModalController, NavController, NavParams, ViewController} from "ionic-angular";
 import {DatabaseService} from "../../../providers/DatabaseService";
 import {AddSoundPage} from "./addSound/addSound";
 import {LoadingProvider} from "../../../providers/loadingprovider";
 import {Media} from "@ionic-native/media";
+import {File} from "@ionic-native/file";
 
 @Component({
   selector: 'page-sound',
   templateUrl: 'sound.html'
 })
 export class SoundPage {
-  sounds:File[];
+  sounds:FileModel[];
+  isModal: Boolean = false;
 
-  constructor(public databaseService: DatabaseService, public navParams: NavParams, public nav: Nav, public loading: LoadingProvider, public modalCtrl: ModalController, public media: Media) {
+  constructor(public databaseService: DatabaseService, public navParams: NavParams, public nav: NavController, public loading: LoadingProvider, public modalCtrl: ModalController, public media: Media, public fileSystem: File,  public _navParams: NavParams, public view: ViewController, public _ngZone: NgZone) {
+    if(this._navParams.get("select") == 1) {
+      this.isModal = true;
+    }
     this.loadSound();
   }
 
   loadSound() {
+    this.sounds = [];
     return new Promise(resolve => {
       this.databaseService.getAllSounds().then(data => {
-        this.sounds = data;
+        this._ngZone.run(() => {
+          this.sounds = data;
+        });
       })
     })
   }
 
   addSound() {
-    let addSoundModal = this.modalCtrl.create(AddSoundPage, {}, {"enableBackdropDismiss": false});
-    addSoundModal.present().then(() => {
+    let addSoundModal = this.modalCtrl.create(AddSoundPage, {'select': 0}, {"enableBackdropDismiss": false});
+
+    addSoundModal.onDidDismiss(() => {
       this.loadSound();
     });
+
+    addSoundModal.present();
   }
 
   playSound(path) {
-    let sound = this.media.create(path);
+    let sound = this.media.create(this.getFullPath(path));
     sound.play();
   }
 
@@ -40,6 +51,16 @@ export class SoundPage {
     this.databaseService.deleteFile(id).then(() => {
       this.loadSound();
     });
+  }
+
+  getFullPath(path:string) {
+    return (this.fileSystem.dataDirectory + "sounds/" + path).replace(/^file:\/\//, '');
+  }
+
+  returnSound(sound:FileModel) {
+    if(this.isModal) {
+      this.view.dismiss({'sound': sound});
+    }
   }
 }
 

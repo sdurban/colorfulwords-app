@@ -15,9 +15,9 @@
 
 <ion-content padding>
   <div class="card-listing">
-    <ion-card *ngFor="let board of boards; let i = index" (click)="goBoard(board.id)">
-      <img *ngIf="board.main_image != null" src="{{ board.main_image }}"/>
-      <img *ngIf="board.main_image == null" src="assets/imgs/splash.png" />
+    <ion-card *ngFor="let board of boards; let i = index" (click)="goBoard(board.id, board.title)">
+      <img *ngIf="board.main_image != null" [src]="getFullPathImage(board.main_image)" style="max-height: 33vh;"/>
+      <img *ngIf="board.main_image == null" src="assets/imgs/splash.png" style="max-height: 33vh;" />
       <div class="card-title">{{ board.title }}</div>
     </ion-card>
   </div>

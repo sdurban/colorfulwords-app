@@ -32,5 +32,8 @@
   "addimage_title": "Añadir una imagen",
   "take_picture": "Hacer una foto",
   "take_picture_library": "Foto de la libreria de imagenes",
-  "add_picture": "Añadir imagen"
+  "add_picture": "Añadir imagen",
+  "select_files_item": "Creación de un nuevo objeto",
+  "select_sounds": "Seleciona un sonido",
+  "select_images": "Seleciona una imagen"
 }

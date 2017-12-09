@@ -96,10 +96,11 @@ export class DatabaseService {
 
   getAllBoards() {
     return this.isReady().then(() => {
-      return this.database.executeSql("SELECT Board.*, File.path FROM Board" +
-        " LEFT JOIN BoardItems ON BoardItems.boardID = Board.id AND position = 0" +
+      return this.database.executeSql("SELECT Board.*, File.path, MIN(BoardItems.id) FROM Board" +
+        " LEFT JOIN BoardItems ON BoardItems.boardID = Board.id" +
         " LEFT JOIN Item ON Item.id = BoardItems.itemID" +
         " LEFT JOIN File ON Item.field1 = File.id" +
+        " GROUP BY Board.id" +
         " ORDER BY title", {}).then(data => {
         let boards:Board[] = [];
 
@@ -140,6 +141,8 @@ export class DatabaseService {
             item.imagePath = data.rows.item(i).imgpath;
             item.soundPath = data.rows.item(i).soundpath;
             item.order = data.rows.item(i).position;
+
+            items.push(item);
           }
 
           return items;
@@ -160,36 +163,24 @@ export class DatabaseService {
     })
   }
 
-  createItem(id_photo:number, id_sound:number) {
+  createItem(title:string, id_photo:number, id_sound:number) {
     return this.isReady().then(() => {
-      return this.database.executeSql("INSERT INTO Item(field1, field2) VALUES (?, ?)", [id_photo, id_sound])
-        .then(() => {
-          return true;
+      return this.database.executeSql("INSERT INTO Item(title, field1, field2) VALUES (?, ?, ?)", [title, id_photo, id_sound])
+        .then((results) => {
+          return results.insertId;
         }).catch(err => {
           return false;
         })
     });
   }
 
-
-  deleteItem(id_photo:number, id_sound:number) {
-    return this.isReady().then(() => {
-      return this.database.executeSql("DELETE FROM Item WHERE field1 = ? AND field2 = ?", [id_photo, id_sound])
-        .then(() => {
-          return true;
-        }).catch((err) => {
-          return err
-        })
-    })
-  }
-
   getAllImages() {
     return this.isReady().then(() => {
       return this.database.executeSql("SELECT * FROM File WHERE type = 'IMAGE' ORDER BY title", {}).then(data => {
-        let items:File[] = [];
+        let items:FileModel[] = [];
 
         for(let i=0; i < data.rows.length; i++) {
-          let item:File = <File>{};
+          let item:FileModel = <FileModel>{};
 
           item.id = data.rows.item(i).id;
           item.title = data.rows.item(i).title;
@@ -207,10 +198,10 @@ export class DatabaseService {
   getAllSounds() {
     return this.isReady().then(() => {
       return this.database.executeSql("SELECT * FROM File WHERE type = 'SOUND' ORDER BY title", {}).then(data => {
-        let items:File[] = [];
+        let items:FileModel[] = [];
 
         for(let i=0; i < data.rows.length; i++) {
-          let item:File = <File>{};
+          let item:FileModel = <FileModel>{};
 
           item.id = data.rows.item(i).id;
           item.title = data.rows.item(i).title;
@@ -238,7 +229,7 @@ export class DatabaseService {
 
   assignItemBoard(item:number, board:number, position:number) {
     return this.isReady().then(() => {
-      return this.database.executeSql("INSERT INTO BoardsItem(boardID, itemID, position) VALUES (?, ?, ?)", [item, board, position])
+      return this.database.executeSql("INSERT INTO BoardItems(boardID, itemID, position) VALUES (?, ?, ?)", [board, item, position])
         .then(() => {
           return true;
         }).catch((err) => {
@@ -249,12 +240,25 @@ export class DatabaseService {
 
   removeItemBoard(item:number, board:number) {
     return this.isReady().then(() => {
-      return this.database.executeSql("DELETE FROM BoardsItem WHERE boardID = ? AND itemID = ?", [item, board])
+      return this.database.executeSql("DELETE FROM BoardItems WHERE boardID = ? AND itemID = ?", [board, item])
         .then(() => {
-          return true;
+          this.deleteItem(item).then(() => {
+            return true;
+          })
         }).catch((err) => {
           return err
       })
     });
+  }
+
+  deleteItem(itemID:number) {
+    return this.isReady().then(() => {
+      return this.database.executeSql("DELETE FROM Item WHERE id = ?", [itemID])
+        .then(() => {
+          return true;
+        }).catch((err) => {
+          return err
+        })
+    })
   }
 }

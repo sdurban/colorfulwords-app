@@ -32,5 +32,8 @@
   "addimage_title": "Add Image",
   "take_picture": "Take a picture from camera",
   "take_picture_library": "Take a picture from library",
-  "add_picture": "Add picture"
+  "add_picture": "Add picture",
+  "select_files_item": "Create new item",
+  "select_sounds": "Select sound",
+  "select_images": "Select image"
 }

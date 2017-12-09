@@ -33,6 +33,7 @@ import {Media} from "@ionic-native/media";
 import {Camera} from "@ionic-native/camera";
 import {AddImagePage} from "../pages/files/image/addImage/addImage";
 import {FilePath} from "@ionic-native/file-path";
+import {AddItemsPage} from "../pages/items/addItem/addItem";
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import {FilePath} from "@ionic-native/file-path";
     SoundPage,
     FilesPage,
     AddSoundPage,
-    AddImagePage
+    AddImagePage,
+    AddItemsPage
   ],
   imports: [
     BrowserModule,
@@ -73,7 +75,8 @@ import {FilePath} from "@ionic-native/file-path";
     SoundPage,
     FilesPage,
     AddSoundPage,
-    AddImagePage
+    AddImagePage,
+    AddItemsPage
   ],
   providers: [
     StatusBar,

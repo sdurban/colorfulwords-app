@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ "select_files_item" | translate | capitalizeFirst }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form>
+    <ion-row>
+      <ion-col>
+        <ion-list inset>
+          <ion-item>
+            <ion-input type="text" placeholder="{{ 'title' | translate | capitalizeFirst }}" name="title" [(ngModel)]="title" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <div *ngIf="!soundSelected" (click)="goSound()" style="text-align: center;"><ion-icon ios="ios-musical-notes" md="md-musical-notes"></ion-icon>{{ "select_sounds" | translate | capitalizeFirst }}</div>
+            <div *ngIf="soundSelected" (click)="goSound()">
+              <ion-icon ios="ios-play" md="md-play" (click)="playSound(sound.path)"></ion-icon>
+              <span style="position: absolute; left: 50%; transform: translate(-50%, 0);">{{sound.title}}</span>
+            </div>
+          </ion-item>
+          <ion-item>
+            <div *ngIf="!imageSelected" (click)="goImage()" style="text-align: center;"><ion-icon ios="ios-images" md="md-images"></ion-icon> {{ "select_images" | translate | capitalizeFirst }}</div>
+            <div *ngIf="imageSelected" (click)="goImage()" style="text-align: center;">
+              <img [src]="getFullPathImage(image.path)" style="max-height: 35vh;"/>
+            </div>
+          </ion-item>
+          <ion-item>
+            <button ion-button round full color="primary" (click)="createItem()">&nbsp;{{ "add_item" | translate }}</button>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

@@ -32,5 +32,8 @@
   "addimage_title": "Afegir una imatge",
   "take_picture": "Fer una foto",
   "take_picture_library": "Agafar la foto de la llibreria d'imatges",
-  "add_picture": "Afegir imatge"
+  "add_picture": "Afegir imatge",
+  "select_files_item": "Creació d'un nou objecte",
+  "select_sounds": "Seleciona un so",
+  "select_images": "Seleciona una imatge"
 }

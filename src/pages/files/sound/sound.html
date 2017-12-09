@@ -9,7 +9,7 @@
 
 <ion-content padding>
   <div>
-    <ion-card *ngFor="let sound of sounds; let i = index">
+    <ion-card *ngFor="let sound of sounds; let i = index" (click)="returnSound(sound)">
       <ion-card-header style="position:relative;">
         <ion-icon ios="ios-play" md="md-play" (click)="playSound(sound.path)"></ion-icon>
         <span style="position: absolute; left: 50%; transform: translate(-50%, 0);">{{sound.title}}</span>

@@ -11,6 +11,7 @@ import {Media, MediaObject} from "@ionic-native/media";
 export class AddSoundPage {
   readonly soundPath:string;
   file = { title: '', path: ''};
+  nameFile:string;
   recording:boolean = false;
   fileRecord:MediaObject;
   nameRecordingFile:string = '';
@@ -27,17 +28,17 @@ export class AddSoundPage {
     }
 
   createSound() {
-    this.database.createFile(this.file.title, this.file.path, "SOUND").then(() => {
+    this.database.createFile(this.file.title, this.nameFile, "SOUND").then(() => {
       this.viewCtrl.dismiss();
     });
   }
 
   recordSound() {
-    let nameFile = new Date().toISOString() + Math.random().toString(36).substring(9);
-    nameFile = nameFile.replace(/\-/g, "").replace(/\:/g, "").replace(/\./g, "");
-    nameFile = nameFile + ".wav";
-    this.nameRecordingFile = this.soundPath.replace(/^file:\/\//, '') + nameFile;
-    this.fileSystem.createFile(this.soundPath, nameFile, true).then(() => {
+    this.nameFile = new Date().toISOString() + Math.random().toString(36).substring(9);
+    this.nameFile = this.nameFile.replace(/\-/g, "").replace(/\:/g, "").replace(/\./g, "");
+    this.nameFile = this.nameFile + ".wav";
+    this.nameRecordingFile = this.soundPath.replace(/^file:\/\//, '') + this.nameFile;
+    this.fileSystem.createFile(this.soundPath, this.nameFile, true).then(() => {
       this.fileRecord = this.media.create(this.nameRecordingFile);
       this.fileRecord.startRecord();
       this.recording = true;
