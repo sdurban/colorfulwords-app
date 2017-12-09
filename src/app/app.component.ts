@@ -9,6 +9,9 @@ import { Globalization } from '@ionic-native/globalization';
 import { Storage } from "@ionic/storage";
 import {KidProvider} from "../providers/KidProvider";
 import {FilesPage} from "../pages/files/files";
+import {DatabaseService} from "../providers/DatabaseService";
+import {File} from "@ionic-native/file";
+import {ConfigurationPage} from "../pages/configuration/configuration";
 
 @Component({
   templateUrl: 'app.html'
@@ -17,9 +20,9 @@ export class ColorfullTalk {
   @ViewChild(Nav) nav: Nav;
   rootPage:any = LoginPage;
 
-  pages: Array<{title: string, component: any, bottom:boolean}>;
+  pages: Array<{title: string, component: any, bottom:boolean, event:string}>;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, translate: TranslateService, globalization: Globalization, storage: Storage, public modeApp: KidProvider) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, translate: TranslateService, globalization: Globalization, public storage: Storage, public modeApp: KidProvider, public database: DatabaseService, public file: File) {
     this.setUpPages();
 
     platform.ready().then(() => {
@@ -34,10 +37,10 @@ export class ColorfullTalk {
   }
   setUpPages() {
     this.pages = [
-      { title: 'boards_title', component: DashboardPage, bottom: false},
-      { title: 'assets_title', component: FilesPage, bottom: false},
-      { title: 'configuration_title', component: DashboardPage, bottom: false},
-      { title: 'logout_title', component: LoginPage, bottom: true},
+      { title: 'boards_title', component: DashboardPage, bottom: false, event: null},
+      { title: 'assets_title', component: FilesPage, bottom: false, event: null},
+      { title: 'configuration_title', component: ConfigurationPage, bottom: false, event: null},
+      { title: 'logout_title', component: LoginPage, bottom: true, event: 'Logout'},
     ];
   }
 
@@ -79,6 +82,21 @@ export class ColorfullTalk {
   }
 
   openPage(page) {
+    switch(page.event) {
+      case 'Logout':
+        this.destroyDatabase();
+      default:
+        break;
+    }
     this.nav.setRoot(page.component);
+  }
+
+  destroyDatabase() {
+    this.storage.remove('language');
+    this.storage.remove('bearer');
+    this.storage.remove('pin');
+    this.database.deleteAll();
+    this.file.removeRecursively(this.file.dataDirectory, "images");
+    this.file.removeRecursively(this.file.dataDirectory, "sounds");
   }
 }

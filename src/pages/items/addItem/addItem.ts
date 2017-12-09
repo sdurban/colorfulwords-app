@@ -36,7 +36,8 @@ export class AddItemsPage {
     return (this.fileSystem.dataDirectory + "sounds/" + path).replace(/^file:\/\//, '');
   }
 
-  playSound(path:string) {
+  playSound($event, path:string) {
+    $event.stopPropagation();
     let sound = this.media.create(this.getFullPathSound(path));
     sound.play();
   }
@@ -73,9 +74,7 @@ export class AddItemsPage {
     if(this.title != '' && this.image.id != null && this.sound.id != null) {
       this.database.createItem(this.title, this.image.id, this.sound.id).then(itemID => {
         this.database.assignItemBoard(itemID, this.boardID, this.position).then(() => {
-          this.callback().then(() => {
-            this.nav.pop();
-          });
+          this.nav.pop();
         });
       });
     }

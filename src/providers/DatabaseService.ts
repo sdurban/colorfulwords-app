@@ -11,14 +11,14 @@ export class DatabaseService {
   private dbReady = new BehaviorSubject<boolean>(false);
 
   constructor(private platform:Platform, private sqlite:SQLite) {
-    this.platform.ready().then(()=>{
+    this.platform.ready().then(() => {
       this.sqlite.create({
         name: 'colorfultalk.db',
         location: 'default'
       })
-        .then((db:SQLiteObject)=>{
+        .then((db:SQLiteObject) => {
           this.database = db;
-          this.createTables().then(()=>{
+          this.createTables().then(() => {
             this.dbReady.next(true);
           });
         })
@@ -27,7 +27,7 @@ export class DatabaseService {
   }
 
   private isReady(){
-    return new Promise((resolve, reject) =>{
+    return new Promise((resolve, reject) => {
       if(this.dbReady.getValue()){
         resolve();
       }
@@ -65,8 +65,7 @@ export class DatabaseService {
             this.database.executeSql(
               `CREATE TABLE IF NOT EXISTS Board (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            title TEXT,
-            dimension TEXT
+            title TEXT
             );`, {})
           }).then(() => {
             this.database.executeSql(
@@ -83,9 +82,9 @@ export class DatabaseService {
     });
   }
 
-  createBoard(title:string, dimension:number) {
+  createBoard(title:string) {
     return this.isReady().then(() => {
-      return this.database.executeSql("INSERT INTO Board(title, dimension) VALUES (?, ?)", [title, dimension])
+      return this.database.executeSql("INSERT INTO Board(title) VALUES (?)", [title])
         .then(() => {
           return true;
         }).catch(err => {
@@ -107,7 +106,6 @@ export class DatabaseService {
         for(let i=0; i< data.rows.length; i++){
           let item:Board = <Board>{};
           item.id = data.rows.item(i).id;
-          item.dimension = data.rows.item(i).dimension;
           item.title = data.rows.item(i).title;
           item.main_image = data.rows.item(i).path;
 
@@ -259,6 +257,20 @@ export class DatabaseService {
         }).catch((err) => {
           return err
         })
+    })
+  }
+
+  deleteAll() {
+    return this.isReady().then(() => {
+      return this.database.executeSql("DELETE FROM BoardItems", []).then(() => {
+        this.database.executeSql("DELETE FROM Board", []).then(() => {
+          this.database.executeSql("DELETE FROM Item", []).then(() => {
+            this.database.executeSql("DELETE FROM File", []).then(() => {
+              return true;
+            })
+          })
+        })
+      })
     })
   }
 }

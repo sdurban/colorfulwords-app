@@ -35,5 +35,13 @@
   "add_picture": "Add picture",
   "select_files_item": "Create new item",
   "select_sounds": "Select sound",
-  "select_images": "Select image"
+  "select_images": "Select image",
+  "enternewpin": "Enter a PIN",
+  "okpin": "Ok",
+  "cancelpin": "Cancel",
+  "enterpinout": "Enter a PIN",
+  "add_item": "Add to board",
+  "configuration_title": "Configuration",
+  "language": "Language",
+  "change_pin": "Change PIN"
 }

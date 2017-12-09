@@ -35,5 +35,13 @@
   "add_picture": "Añadir imagen",
   "select_files_item": "Creación de un nuevo objeto",
   "select_sounds": "Seleciona un sonido",
-  "select_images": "Seleciona una imagen"
+  "select_images": "Seleciona una imagen",
+  "enternewpin": "Introducir un PIN para proteger el sistema",
+  "okpin": "Aceptar",
+  "cancelpin": "Cancelar",
+  "enterpinout": "Introducir un PIN para salir del modo niño",
+  "add_item": "Añadir al tablero",
+  "configuration_title": "Configuración",
+  "language": "Idioma",
+  "change_pin": "Cambiar PIN"
 }

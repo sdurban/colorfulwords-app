@@ -14,7 +14,7 @@ import {File} from "@ionic-native/file";
 export class DashboardPage {
   boards:Array<Board>;
 
-  constructor(public database: DatabaseService, public modalCtrl: ModalController, public loading: LoadingProvider, public modeApp: KidProvider, public nav : Nav, public _ngZone: NgZone, public fileSystem: File) {
+  constructor(public database: DatabaseService, public modalCtrl: ModalController, public loading: LoadingProvider, public modeApp: KidProvider, public nav: Nav, public _ngZone: NgZone, public fileSystem: File) {
     this.boards = [];
     this.loading.show('board_loading').then(() => {
       this.loadBoards().then(() => {
@@ -51,5 +51,9 @@ export class DashboardPage {
 
   getFullPathImage(path:string) {
     return (this.fileSystem.dataDirectory + "images/" + path).replace(/^file:\/\//, '');
+  }
+
+  ionViewDidEnter() {
+    this.loadBoards();
   }
 }

@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ "configuration_title" | translate | capitalizeFirst }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label>{{"language" | translate | capitalizeFirst}}</ion-label>
+      <ion-select [(ngModel)]="language" (ionChange)="chgLanguage($event)">
+        <ion-option value="en">{{"english" | translate | capitalizeFirst}}</ion-option>
+        <ion-option value="ca">{{"català" | translate | capitalizeFirst}}</ion-option>
+        <ion-option value="es">{{"español" | translate | capitalizeFirst}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <button ion-item (click)="setPin()">{{"change_pin" | translate | capitalizeFirst}}</button>
+  </ion-list>
+</ion-content>

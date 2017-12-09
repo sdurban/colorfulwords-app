@@ -89,6 +89,9 @@ ion-content {
   .boardStyle {
     display: flex;
     flex-wrap: wrap;
+    ion-card.fullWidth {
+      width: 100vw;
+    }
     ion-card {
       position: relative;
       margin: 0;

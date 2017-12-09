@@ -22,15 +22,15 @@ export class ItemsPage {
     this.boardID = navParams.get('boardID');
     this.titleBoard = navParams.get('titleBoard');
     this.loading.show('loading_items').then(() => {
-      this.loadItems(this.boardID).then(() => {
+      this.loadItems().then(() => {
         this.loading.dismiss();
       });
     })
   }
 
-  loadItems(boardID:number) {
+  loadItems() {
     return new Promise(success => {
-      this.database.getItemsBoard(boardID).then((data:any) => {
+      this.database.getItemsBoard(this.boardID).then((data:any) => {
         this._ngZone.run(() => {
           this.items = data;
           this.position = data.length;
@@ -41,7 +41,7 @@ export class ItemsPage {
   }
 
   addItem() {
-    this.nav.push(AddItemsPage, {'boardID': this.boardID, 'reloadItems': this.loadItems});
+    this.nav.push(AddItemsPage, {'boardID': this.boardID, 'reloadItems': this});
   }
 
   getFullPathImage(path:string) {
@@ -59,8 +59,12 @@ export class ItemsPage {
 
   removeItemBoard(itemID:number) {
     this.database.removeItemBoard(itemID, this.boardID).then(() => {
-      this.loadItems(this.boardID);
+      this.loadItems();
     })
+  }
+
+  ionViewDidEnter() {
+    this.loadItems();
   }
 }
 

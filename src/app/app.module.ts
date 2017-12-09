@@ -34,6 +34,8 @@ import {Camera} from "@ionic-native/camera";
 import {AddImagePage} from "../pages/files/image/addImage/addImage";
 import {FilePath} from "@ionic-native/file-path";
 import {AddItemsPage} from "../pages/items/addItem/addItem";
+import {PinDialog} from "@ionic-native/pin-dialog";
+import {ConfigurationPage} from "../pages/configuration/configuration";
 
 
 @NgModule({
@@ -49,7 +51,8 @@ import {AddItemsPage} from "../pages/items/addItem/addItem";
     FilesPage,
     AddSoundPage,
     AddImagePage,
-    AddItemsPage
+    AddItemsPage,
+    ConfigurationPage
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,8 @@ import {AddItemsPage} from "../pages/items/addItem/addItem";
     FilesPage,
     AddSoundPage,
     AddImagePage,
-    AddItemsPage
+    AddItemsPage,
+    ConfigurationPage
   ],
   providers: [
     StatusBar,
@@ -88,6 +92,7 @@ import {AddItemsPage} from "../pages/items/addItem/addItem";
     Media,
     Camera,
     FilePath,
+    PinDialog,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
     ServerProvider,

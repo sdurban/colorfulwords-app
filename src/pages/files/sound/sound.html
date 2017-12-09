@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button menuToggle  *ngIf="!isModal">
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>{{ "sound_library" | translate | capitalizeFirst }}</ion-title>
@@ -11,9 +11,10 @@
   <div>
     <ion-card *ngFor="let sound of sounds; let i = index" (click)="returnSound(sound)">
       <ion-card-header style="position:relative;">
-        <ion-icon ios="ios-play" md="md-play" (click)="playSound(sound.path)"></ion-icon>
+        <ion-icon ios="ios-play" md="md-play" (click)="playSound(sound.path)" *ngIf="!isModal"></ion-icon>
+        <ion-icon ios="ios-musical-note" md="md-musical-note" *ngIf="isModal"></ion-icon>
         <span style="position: absolute; left: 50%; transform: translate(-50%, 0);">{{sound.title}}</span>
-        <ion-icon ios="ios-trash" md="md-trash" style="position: absolute; right: 16px;" (click)="removeSound(sound.id)"></ion-icon>
+        <ion-icon ios="ios-trash" md="md-trash" style="position: absolute; right: 16px;" (click)="removeSound(sound.id)" *ngIf="!isModal"></ion-icon>
       </ion-card-header>
     </ion-card>
   </div>

@@ -15,7 +15,7 @@
           <ion-item>
             <div *ngIf="!soundSelected" (click)="goSound()" style="text-align: center;"><ion-icon ios="ios-musical-notes" md="md-musical-notes"></ion-icon>{{ "select_sounds" | translate | capitalizeFirst }}</div>
             <div *ngIf="soundSelected" (click)="goSound()">
-              <ion-icon ios="ios-play" md="md-play" (click)="playSound(sound.path)"></ion-icon>
+              <ion-icon ios="ios-play" md="md-play" (click)="playSound($event, sound.path)"></ion-icon>
               <span style="position: absolute; left: 50%; transform: translate(-50%, 0);">{{sound.title}}</span>
             </div>
           </ion-item>

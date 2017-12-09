@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button menuToggle *ngIf="!isModal">
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>{{ "image_library" | translate | capitalizeFirst }}</ion-title>
@@ -8,13 +8,13 @@
 </ion-header>
 
 <ion-content class="nopadding">
-  <div class="boardStyle">
-    <ion-card *ngFor="let image of images; let i = index" [style.background-image]="'url('+getFullPath(image.path)+')'" (click)="returnImage(image)">
+  <div class="boardStyle" style="z-index: 999;">
+    <ion-card *ngFor="let image of images; let i = index" [style.background-image]="'url('+getFullPath(image.path)+')'" (click)="returnImage(image)" [ngClass]="(isModal)?'fullWidth':'normal'">
       <div class="card-title">{{ image.title }}</div>
-      <button (click)="removeImage(image.id)"><ion-icon ios="ios-trash" md="md-trash"></ion-icon></button>
+      <button (click)="removeImage(image.id)" *ngIf="!isModal"><ion-icon ios="ios-trash" md="md-trash"></ion-icon></button>
     </ion-card>
   </div>
-  <ion-fab bottom right>
+  <ion-fab bottom right style="z-index: 1000;">
     <button ion-fab (click)="addImage()"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
 </ion-content>

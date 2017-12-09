@@ -7,14 +7,14 @@ import {ViewController} from "ionic-angular";
   templateUrl: 'addboard.html'
 })
 export class AddBoardPage {
-  board = { title: '', dimension: 0};
+  board = { title: ''};
 
   constructor(public database: DatabaseService, public viewCtrl: ViewController) {
 
   }
 
   createBoard() {
-    this.database.createBoard(this.board.title, this.board.dimension).then(() => {
+    this.database.createBoard(this.board.title).then(() => {
       this.viewCtrl.dismiss();
     });
   }

@@ -35,5 +35,13 @@
   "add_picture": "Afegir imatge",
   "select_files_item": "Creació d'un nou objecte",
   "select_sounds": "Seleciona un so",
-  "select_images": "Seleciona una imatge"
+  "select_images": "Seleciona una imatge",
+  "enternewpin": "Introdueix un PIN per protegir el sistema",
+  "okpin": "Aceptar",
+  "cancelpin": "Cancelar",
+  "enterpinout": "Introdueix un PIN per sortir del mode nen",
+  "add_item": "Afegir a tauler",
+  "configuration_title": "Configuració",
+  "language": "Idioma",
+  "change_pin": "Cambiar PIN"
 }
