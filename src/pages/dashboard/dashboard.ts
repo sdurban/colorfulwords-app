@@ -56,4 +56,8 @@ export class DashboardPage {
   ionViewDidEnter() {
     this.loadBoards();
   }
+
+  syncData() {
+
+  }
 }

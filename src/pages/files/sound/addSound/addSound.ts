@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {ViewController} from "ionic-angular";
+import {Platform, ViewController} from "ionic-angular";
 import {DatabaseService} from "../../../../providers/DatabaseService";
 import {File} from "@ionic-native/file";
 import {Media, MediaObject} from "@ionic-native/media";
@@ -16,14 +16,22 @@ export class AddSoundPage {
   fileRecord:MediaObject;
   nameRecordingFile:string = '';
 
-  constructor(public database: DatabaseService, public viewCtrl: ViewController, public fileSystem: File, public media: Media) {
-    this.soundPath = this.fileSystem.dataDirectory + "sounds/";
-    this.fileSystem.checkDir(this.fileSystem.dataDirectory, "sounds").then(exists => {
+  constructor(public database: DatabaseService, public viewCtrl: ViewController, public fileSystem: File, public media: Media, public platform: Platform) {
+    let dataDirectory = "";
+    if(this.platform.is('android')) {
+      dataDirectory = this.fileSystem.externalDataDirectory;
+      this.soundPath = this.fileSystem.externalDataDirectory + "sounds/";
+    } else {
+      dataDirectory = this.fileSystem.dataDirectory;
+      this.soundPath = this.fileSystem.dataDirectory + "sounds/";
+    }
+
+    this.fileSystem.checkDir(dataDirectory, "sounds").then(exists => {
       if(!exists) {
-        this.fileSystem.createDir(this.fileSystem.dataDirectory, "sounds", false);
+        this.fileSystem.createDir(dataDirectory, "sounds", false);
       }
     }).catch((err) => {
-      this.fileSystem.createDir(this.fileSystem.dataDirectory, "sounds", false);
+      this.fileSystem.createDir(dataDirectory, "sounds", false);
     });
     }
 

@@ -1,6 +1,6 @@
 import {Component, NgZone} from '@angular/core';
 import { DatabaseService} from "../../providers/DatabaseService";
-import {ModalController, NavController, NavParams} from "ionic-angular";
+import {ModalController, NavController, NavParams, Platform} from "ionic-angular";
 import {LoadingProvider} from "../../providers/loadingprovider";
 import {KidProvider} from "../../providers/KidProvider";
 import {AddItemsPage} from "./addItem/addItem";
@@ -17,7 +17,7 @@ export class ItemsPage {
   items:Array<Item>;
   position:number = 0;
 
-  constructor(public database: DatabaseService, public modalCtrl: ModalController, public loading: LoadingProvider, public modeApp: KidProvider, public navParams: NavParams, public nav: NavController, public _ngZone: NgZone, public fileSystem: File, public media: Media) {
+  constructor(public database: DatabaseService, public modalCtrl: ModalController, public loading: LoadingProvider, public modeApp: KidProvider, public navParams: NavParams, public nav: NavController, public _ngZone: NgZone, public fileSystem: File, public media: Media, public platform: Platform) {
     this.items = [];
     this.boardID = navParams.get('boardID');
     this.titleBoard = navParams.get('titleBoard');
@@ -49,7 +49,7 @@ export class ItemsPage {
   }
 
   getFullPathSound(path:string) {
-    return (this.fileSystem.dataDirectory + "sounds/" + path).replace(/^file:\/\//, '');
+    return ((this.platform.is('android') ? this.fileSystem.externalDataDirectory : this.fileSystem.dataDirectory) + "sounds/" + path).replace(/^file:\/\//, '');
   }
 
   playSound(path:string) {

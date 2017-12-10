@@ -1,5 +1,5 @@
 import {Component, NgZone} from '@angular/core';
-import {ModalController, NavController, NavParams, ViewController} from "ionic-angular";
+import {ModalController, NavController, NavParams, Platform, ViewController} from "ionic-angular";
 import {DatabaseService} from "../../../providers/DatabaseService";
 import {AddSoundPage} from "./addSound/addSound";
 import {LoadingProvider} from "../../../providers/loadingprovider";
@@ -14,7 +14,7 @@ export class SoundPage {
   sounds:FileModel[];
   isModal: Boolean = false;
 
-  constructor(public databaseService: DatabaseService, public navParams: NavParams, public nav: NavController, public loading: LoadingProvider, public modalCtrl: ModalController, public media: Media, public fileSystem: File,  public _navParams: NavParams, public view: ViewController, public _ngZone: NgZone) {
+  constructor(public databaseService: DatabaseService, public navParams: NavParams, public nav: NavController, public loading: LoadingProvider, public modalCtrl: ModalController, public media: Media, public fileSystem: File,  public _navParams: NavParams, public view: ViewController, public _ngZone: NgZone, public platform: Platform) {
     if(this._navParams.get("select") == 1) {
       this.isModal = true;
     }
@@ -54,7 +54,7 @@ export class SoundPage {
   }
 
   getFullPath(path:string) {
-    return (this.fileSystem.dataDirectory + "sounds/" + path).replace(/^file:\/\//, '');
+    return ((this.platform.is('android') ? this.fileSystem.externalDataDirectory : this.fileSystem.dataDirectory) + "sounds/" + path).replace(/^file:\/\//, '');
   }
 
   returnSound(sound:FileModel) {

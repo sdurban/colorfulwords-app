@@ -5,7 +5,7 @@
     </button>
     <ion-title>{{ titleBoard }}</ion-title>
     <ion-buttons end>
-      <button>
+      <button style="background-color: transparent;">
         <img class="icon-bar" *ngIf="modeApp.status == modeApp.ADULT_MODE" (click)="modeApp.goKid()" src="assets/imgs/icons/kid-mode.svg">
         <img class="icon-bar" *ngIf="modeApp.status == modeApp.KID_MODE" (click)="modeApp.goAdult()" src="assets/imgs/icons/adult-mode.svg">
       </button>

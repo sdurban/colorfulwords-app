@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LoadingController, Loading, AlertController } from "ionic-angular";
 import { AuthService } from "../../providers/auth-service";
 import {DashboardPage} from "../dashboard/dashboard";
+import {ScreenOrientation} from "@ionic-native/screen-orientation";
 
 @Component({
   selector: 'page-login',
@@ -18,7 +19,7 @@ export class LoginPage {
   registerCredentials = { email: '', password: '', repeatpassword: '' };
   loading:Loading;
 
-  constructor(public navCtrl: NavController, public translate: TranslateService, public loadingCtrl: LoadingController, private auth: AuthService, private nav: NavController, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public translate: TranslateService, public loadingCtrl: LoadingController, private auth: AuthService, private nav: NavController, private alertCtrl: AlertController, public screenOrientation: ScreenOrientation) {
     this.context = "login";
     this.extensionBackground ='.jpg';
     this.basePathBackground = 'assets/imgs/login-page/';
@@ -33,6 +34,8 @@ export class LoginPage {
 
       this.backgroundElement = this.basePathBackground+this.currentBackground+this.extensionBackground;
     }, 10000);
+
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
   }
 
   changeLanguage(lang:string) {
@@ -56,6 +59,7 @@ export class LoginPage {
         this.auth.login(this.registerCredentials).subscribe(
           value => {
             if(value) {
+              this.screenOrientation.unlock();
               this.nav.setRoot(DashboardPage);
             } else {
               this.loading.dismissAll();
@@ -101,6 +105,7 @@ export class LoginPage {
         this.auth.register(this.registerCredentials).subscribe(
           value => {
             if(value) {
+              this.screenOrientation.unlock();
               this.nav.setRoot(DashboardPage);
             } else {
               this.loading.dismissAll();

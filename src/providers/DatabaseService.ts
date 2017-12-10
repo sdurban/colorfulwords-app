@@ -56,6 +56,7 @@ export class DatabaseService {
           this.database.executeSql(
             `CREATE TABLE IF NOT EXISTS Item (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id_server INTEGER,
         title TEXT,
         field1 INTEGER,
         field2 INTEGER,
@@ -65,12 +66,14 @@ export class DatabaseService {
             this.database.executeSql(
               `CREATE TABLE IF NOT EXISTS Board (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id_server INTEGER,
             title TEXT
             );`, {})
           }).then(() => {
             this.database.executeSql(
               `CREATE TABLE IF NOT EXISTS BoardItems (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id_server INTEGER,
             boardID INTEGER REFERENCES Board(id),
             itemID INTEGER REFERENCES Item(id),
             position INTEGER
@@ -80,6 +83,16 @@ export class DatabaseService {
           })
         }).catch((err) => console.log("Error detected creating tables", err));
     });
+  }
+
+  uploadFileUpload(id:number, id_server:number) {
+    return this.isReady().then(() => {
+      this.database.executeSql("UPDATE File SET id_server = ? WHERE id = ?", [id_server, id]).then(() => {
+        return true;
+      }).catch(err => {
+        return false;
+      });
+    })
   }
 
   createBoard(title:string) {

@@ -1,5 +1,5 @@
 import {Component, NgZone} from "@angular/core";
-import {ModalController, NavController, NavParams} from "ionic-angular";
+import {ModalController, NavController, NavParams, Platform} from "ionic-angular";
 import {File} from "@ionic-native/file";
 import {Media} from "@ionic-native/media";
 import {DatabaseService} from "../../../providers/DatabaseService";
@@ -21,7 +21,7 @@ export class AddItemsPage {
   imageSelected:Boolean = false;
   position:number = 0;
 
-  constructor(public database: DatabaseService, public fileSystem: File, public media: Media, public modalCtrl: ModalController,  public _ngZone: NgZone, public nav: NavController, public _navParams: NavParams) {
+  constructor(public database: DatabaseService, public fileSystem: File, public media: Media, public modalCtrl: ModalController,  public _ngZone: NgZone, public nav: NavController, public _navParams: NavParams, public platform: Platform) {
     this.boardID =  this._navParams.get('boardID');
     this.callback = this._navParams.get('reloadItems');
     this.position = this._navParams.get('position');
@@ -33,7 +33,7 @@ export class AddItemsPage {
   }
 
   getFullPathSound(path:string) {
-    return (this.fileSystem.dataDirectory + "sounds/" + path).replace(/^file:\/\//, '');
+    return ((this.platform.is('android') ? this.fileSystem.externalDataDirectory : this.fileSystem.dataDirectory) + "sounds/" + path).replace(/^file:\/\//, '');
   }
 
   playSound($event, path:string) {

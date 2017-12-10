@@ -36,6 +36,7 @@ import {FilePath} from "@ionic-native/file-path";
 import {AddItemsPage} from "../pages/items/addItem/addItem";
 import {PinDialog} from "@ionic-native/pin-dialog";
 import {ConfigurationPage} from "../pages/configuration/configuration";
+import {ScreenOrientation} from "@ionic-native/screen-orientation";
 
 
 @NgModule({
@@ -93,6 +94,7 @@ import {ConfigurationPage} from "../pages/configuration/configuration";
     Camera,
     FilePath,
     PinDialog,
+    ScreenOrientation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
     ServerProvider,

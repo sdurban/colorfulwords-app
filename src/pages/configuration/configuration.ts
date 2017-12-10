@@ -18,9 +18,10 @@ export class ConfigurationPage {
       } else {
         if (typeof window['cordova'] !== "undefined") {
           this.globalization.getPreferredLanguage().then((lang:any) => {
-            if (lang.substring(0, 3) == "es-") {
+            let langDefault = lang.value;
+            if (langDefault.substring(0, 3) == "es-") {
               this.language = 'es';
-            } else if (lang.substring(0, 3) == 'en-') {
+            } else if (langDefault.substring(0, 3) == 'en-') {
               this.language = 'en'
             }
           });
@@ -33,7 +34,10 @@ export class ConfigurationPage {
     this.kidMode.setPin();
   }
 
-  chgLanguage() {
+  chgLanguage($event) {
+    if(typeof $event.stopPropagation !== "undefined") {
+      $event.stopPropagation();
+    }
     this.storage.set('language', this.language);
     this.translate.use(this.language);
   }

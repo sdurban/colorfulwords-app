@@ -20,6 +20,7 @@
     position: absolute;
     opacity: 0.4;
   }
+
   #banner {
     width: 40vw;
     display: block;
@@ -34,6 +35,19 @@
     and (-webkit-min-device-pixel-ratio: 1) {
       width: 60vw;
       margin-top: 10vh;
+    }
+    @media only screen
+    and (min-device-width: 320px)
+    and (max-device-width: 480px)
+    and (orientation: portrait) {
+      height: 50vh;
+      width: auto;
+    }
+    @media only screen
+    and (min-device-width: 320px)
+    and (max-device-width: 568px)
+    and (orientation: landscape) {
+      display: none;
     }
   }
   .contentPage {
@@ -56,6 +70,19 @@
       and (-webkit-min-device-pixel-ratio: 1) {
         bottom: 20vh;
       }
+      @media only screen
+      and (min-device-width: 320px)
+      and (max-device-width: 480px)
+      and (orientation: portrait) {
+        width: 77vw;
+        left: calc(36vw - 25vw);
+      }
+      @media only screen
+      and (min-device-width: 320px)
+      and (max-device-width: 568px)
+      and (orientation: landscape) {
+        bottom: 30vh;
+      }
     }
     .form {
       width: calc(50vw + 16*2px);
@@ -69,6 +96,19 @@
       and (orientation: portrait)
       and (-webkit-min-device-pixel-ratio: 1) {
         bottom: 25vh;
+      }
+      @media only screen
+      and (min-device-width: 320px)
+      and (max-device-width: 480px)
+      and (orientation: portrait) {
+        width: calc(76vw + 16*2px);
+        left: calc(36vw - 25vw - 16px);
+      }
+      @media only screen
+      and (min-device-width: 320px)
+      and (max-device-width: 568px)
+      and (orientation: landscape) {
+        bottom: 40vh;
       }
     }
   }
@@ -84,6 +124,18 @@
     and (orientation: portrait)
     and (-webkit-min-device-pixel-ratio: 1) {
       flex-direction: column;
+    }
+    @media only screen
+    and (min-device-width: 320px)
+    and (max-device-width: 480px)
+    and (orientation: portrait) {
+      display: none;
+    }
+    @media only screen
+    and (min-device-width: 320px)
+    and (max-device-width: 568px)
+    and (orientation: landscape) {
+      display: none;
     }
     span {
       margin-left: 1vw;
@@ -109,5 +161,19 @@
     height: 5vh;
     font-size: 2vw;
     padding-top: 1vh;
+    @media only screen
+    and (min-device-width: 320px)
+    and (max-device-width: 480px)
+    and (orientation: portrait) {
+      height: 6vh;
+      font-size: 4vw;
+    }
+    @media only screen
+    and (min-device-width: 320px)
+    and (max-device-width: 568px)
+    and (orientation: landscape) {
+      height: 10vh;
+      font-size: 2.5vw;
+    }
   }
 }
