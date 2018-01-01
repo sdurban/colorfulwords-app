@@ -1,5 +1,5 @@
 import {Component, NgZone} from '@angular/core';
-import {ModalController, NavController, NavParams, ViewController} from "ionic-angular";
+import {ModalController, NavController, NavParams, Platform, ViewController} from "ionic-angular";
 import {DatabaseService} from "../../../providers/DatabaseService";
 import {LoadingProvider} from "../../../providers/loadingprovider";
 import {AddImagePage} from "./addImage/addImage";
@@ -13,7 +13,7 @@ export class ImagePage {
   images:FileModel[];
   isModal:Boolean = false;
 
-  constructor(public databaseService: DatabaseService, public navParams: NavParams, public nav: NavController, public loading: LoadingProvider, public modalCtrl: ModalController, public fileSystem: File,  public _navParams: NavParams, public view: ViewController, public _ngZone: NgZone) {
+  constructor(public databaseService: DatabaseService, public navParams: NavParams, public nav: NavController, public loading: LoadingProvider, public modalCtrl: ModalController, public fileSystem: File,  public _navParams: NavParams, public view: ViewController, public _ngZone: NgZone, public platform: Platform) {
     if(this._navParams.get("select") == 1) {
       this.isModal = true;
     }
@@ -52,7 +52,7 @@ export class ImagePage {
   }
 
   getFullPath(path:string) {
-    return (this.fileSystem.dataDirectory + "images/" + path).replace(/^file:\/\//, '');
+    return ((this.platform.is('android') ? this.fileSystem.externalDataDirectory : this.fileSystem.dataDirectory) + "images/" + path).replace(/^file:\/\//, '');
   }
 
   returnImage(image:FileModel) {

@@ -1,4 +1,4 @@
 export const ENV = {
   mode: 'Production',
-  apiURL: 'https://colorfulwords.com/api/v1/'
+  apiURL: 'https://adm.colorfultalk.com/api/v1/'
 };

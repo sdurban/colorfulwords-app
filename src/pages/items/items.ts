@@ -45,7 +45,7 @@ export class ItemsPage {
   }
 
   getFullPathImage(path:string) {
-    return (this.fileSystem.dataDirectory + "images/" + path).replace(/^file:\/\//, '');
+    return ((this.platform.is('android') ? this.fileSystem.externalDataDirectory : this.fileSystem.dataDirectory) + "images/" + path).replace(/^file:\/\//, '');
   }
 
   getFullPathSound(path:string) {

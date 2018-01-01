@@ -10,6 +10,7 @@ import {Media, MediaObject} from "@ionic-native/media";
 })
 export class AddSoundPage {
   readonly soundPath:string;
+  filePathName:string;
   file = { title: '', path: ''};
   nameFile:string;
   recording:boolean = false;

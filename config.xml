@@ -1,10 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.colorfultalk.app" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.colorfultalk.app" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>ColorfulTalk</name>
     <description>Augmentative Talk APP</description>
     <author email="sergio@durban.cat" href="http://colorfultalk.com/">Sergio Durban Belmonte</author>
     <content src="index.html" />
-    <access origin="*" />
+    <access origin="http://colorfultalk.192.168.0.164.xip.io" />
+    <access origin="https://adm.colorfultalk.com" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -78,7 +79,6 @@
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
     <engine name="ios" spec="^4.5.4" />
-    <engine name="osx" spec="4.0.1" />
     <engine name="android" spec="6.3.0" />
     <plugin name="cordova-sqlite-storage" spec="^2.1.2" />
     <plugin name="cordova-plugin-device" spec="^1.1.4" />

@@ -11,6 +11,7 @@ import {FilePath} from "@ionic-native/file-path";
 })
 export class AddImagePage {
   readonly imagePath:string;
+  filePathName:string;
   file = { title: '', path: ''};
   recording:boolean = false;
   nameImageFile:string = '';
@@ -23,13 +24,18 @@ export class AddImagePage {
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     };
-    this.imagePath = this.fileSystem.dataDirectory + "images/";
-    this.fileSystem.checkDir(this.fileSystem.dataDirectory, "images").then(exists => {
+    if(this.platform.is('android')) {
+      this.filePathName = this.fileSystem.externalDataDirectory;
+    } else {
+      this.filePathName = this.fileSystem.dataDirectory;
+    }
+    this.imagePath = this.filePath + "images/";
+    this.fileSystem.checkDir(this.filePathName, "images").then(exists => {
       if(!exists) {
-        this.fileSystem.createDir(this.fileSystem.dataDirectory, "images", false);
+        this.fileSystem.createDir(this.filePathName, "images", false);
       }
     }).catch((err) => {
-      this.fileSystem.createDir(this.fileSystem.dataDirectory, "images", false);
+      this.fileSystem.createDir(this.filePathName, "images", false);
     });
   }
 

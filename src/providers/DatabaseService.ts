@@ -85,9 +85,39 @@ export class DatabaseService {
     });
   }
 
-  uploadFileUpload(id:number, id_server:number) {
+  updateFileUpload(id:number, id_server:number) {
     return this.isReady().then(() => {
       this.database.executeSql("UPDATE File SET id_server = ? WHERE id = ?", [id_server, id]).then(() => {
+        return true;
+      }).catch(err => {
+        return false;
+      });
+    })
+  }
+
+  updateItemUpload(id:number, id_server:number) {
+    return this.isReady().then(() => {
+      this.database.executeSql("UPDATE Item SET id_server = ? WHERE id = ?", [id_server, id]).then(() => {
+        return true;
+      }).catch(err => {
+        return false;
+      });
+    })
+  }
+
+  updateBoard(id:number, id_server:number) {
+    return this.isReady().then(() => {
+      this.database.executeSql("UPDATE Board SET id_server = ? WHERE id = ?", [id_server, id]).then(() => {
+        return true;
+      }).catch(err => {
+        return false;
+      });
+    })
+  }
+
+  updateBoardItems(id:number, id_server:number) {
+    return this.isReady().then(() => {
+      this.database.executeSql("UPDATE BoardItems SET id_server = ? WHERE id = ?", [id_server, id]).then(() => {
         return true;
       }).catch(err => {
         return false;
@@ -185,6 +215,51 @@ export class DatabaseService {
     });
   }
 
+  getAllFiles() {
+    return this.isReady().then(() => {
+      return this.database.executeSql("SELECT * FROM File ORDER BY title", {}).then(data => {
+        let items:FileModel[] = [];
+
+        for(let i=0; i < data.rows.length; i++) {
+          let item:FileModel = <FileModel>{};
+
+          item.id = data.rows.item(i).id;
+          item.id_server = data.rows.item(i).id_server;
+          item.title = data.rows.item(i).title;
+          item.path = data.rows.item(i).path;
+          item.type = data.rows.item(i).type;
+
+          items.push(item);
+        }
+
+        return items;
+      });
+    });
+  }
+
+  getFile(id:number) {
+    return this.isReady().then(() => {
+      return this.database.executeSql("SELECT * FROM File WHERE id = ? ORDER BY title", [id]).then(data => {
+        let items:FileModel[] = [];
+
+        for(let i=0; i < data.rows.length; i++) {
+          let item:FileModel = <FileModel>{};
+
+          item.id = data.rows.item(i).id;
+          item.id_server = data.rows.item(i).id_server;
+          item.title = data.rows.item(i).title;
+          item.path = data.rows.item(i).path;
+          item.type = data.rows.item(i).type;
+
+          items.push(item);
+        }
+
+        return items;
+      });
+    });
+  }
+
+
   getAllImages() {
     return this.isReady().then(() => {
       return this.database.executeSql("SELECT * FROM File WHERE type = 'IMAGE' ORDER BY title", {}).then(data => {
@@ -227,9 +302,9 @@ export class DatabaseService {
     });
   }
 
-  createFile(name:string, path:string, type:string) {
+  createFile(name:string, path:string, type:string, id_server:number = 0) {
     return this.isReady().then(() => {
-      return this.database.executeSql("INSERT INTO File(id_server, type, title, path) VALUES (0, ?, ?, ?)", [type, name, path])
+      return this.database.executeSql("INSERT INTO File(id_server, type, title, path) VALUES (?, ?, ?, ?)", [id_server, type, name, path])
         .then(() => {
           return true;
         }).catch(err => {
