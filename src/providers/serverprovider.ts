@@ -124,7 +124,7 @@ export class ServerProvider {
     let fileTransfer: FileTransferObject = this.transfer.create();
 
     let filePath:string = this.fileSystem.dataDirectory;
-    
+
     if(this.platform.is('android')) {
       filePath = this.fileSystem.externalDataDirectory;
     } else {
@@ -172,7 +172,8 @@ export class ServerProvider {
         fileName: file.path,
         headers: {
           "Authorization": this.headers.get('Authorization')
-        }
+        },
+        chunkedMode: false
       };
 
 

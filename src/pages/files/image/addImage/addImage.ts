@@ -29,7 +29,7 @@ export class AddImagePage {
     } else {
       this.filePathName = this.fileSystem.dataDirectory;
     }
-    this.imagePath = this.filePath + "images/";
+    this.imagePath = this.filePathName + "images/";
     this.fileSystem.checkDir(this.filePathName, "images").then(exists => {
       if(!exists) {
         this.fileSystem.createDir(this.filePathName, "images", false);
@@ -80,6 +80,6 @@ export class AddImagePage {
   }
 
   public fullImagePath(path) {
-    return (this.fileSystem.dataDirectory + "images/" + path).replace(/^file:\/\//, '');
+    return ((this.platform.is('android') ? this.fileSystem.externalDataDirectory : this.fileSystem.dataDirectory) + "images/" + path).replace(/^file:\/\//, '');
   }
 }
