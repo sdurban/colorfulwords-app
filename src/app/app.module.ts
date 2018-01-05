@@ -106,6 +106,12 @@ import {ScreenOrientation} from "@ionic-native/screen-orientation";
 })
 export class AppModule {}
 
+/**
+ * Makes async requests to load JSON translate files.
+ *
+ * @param {HttpClient} http
+ * @returns {TranslateHttpLoader}
+ */
 export function setTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }

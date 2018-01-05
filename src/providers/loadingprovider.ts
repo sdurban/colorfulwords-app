@@ -11,7 +11,14 @@ export class LoadingProvider {
 
   public constructor(public translate: TranslateService, public loadingCtrl: LoadingController) {}
 
+  /**
+   * Shows the message as loading screen.
+   *
+   * @param message
+   * @returns {Promise}
+   */
   show(message) {
+    //TODO: NOT WORKING context is missing
     return new Promise(resolve => {
       this.translate.get(message).subscribe(
         value => {

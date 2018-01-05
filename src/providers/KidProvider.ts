@@ -18,6 +18,9 @@ export class KidProvider {
     })
   }
 
+  /**
+   * Checks if pin inserted is correct then go to adult mode.
+   */
   public goAdult() {
     this.translate.stream(['enterpinout', 'okpin', 'cancelpin']).subscribe(data => {
       this.pinDialog.prompt(data['enterpinout'], data['enterpinout'], [data['okpin'], data['cancelpin']]).then((result:any) => {
@@ -27,6 +30,9 @@ export class KidProvider {
     });
   }
 
+  /**
+   * Checks if pin is setted and then go to kid mode.
+   */
   public goKid() {
     if(this.pin == '0000') {
       this.setPin().then(() => {
@@ -37,6 +43,11 @@ export class KidProvider {
     }
   }
 
+  /**
+   * Triggers PIN modal and gets data from it saving in storage for next uses.
+   *
+   * @returns {Promise}
+   */
   public setPin() {
     return new Promise((resolve, reject) => {
       this.translate.stream(['enternewpin', 'okpin', 'cancelpin']).subscribe(data => {

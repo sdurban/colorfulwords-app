@@ -27,7 +27,11 @@ export class ItemsPage {
       });
     })
   }
-
+  /**
+   * Load/Updates items showed in the page.
+   *
+   * @returns {Promise}
+   */
   loadItems() {
     return new Promise(success => {
       this.database.getItemsBoard(this.boardID).then((data:any) => {
@@ -40,23 +44,50 @@ export class ItemsPage {
     });
   }
 
+  /**
+   * Shows addItem controller.
+   */
   addItem() {
     this.nav.push(AddItemsPage, {'boardID': this.boardID, 'reloadItems': this});
   }
 
+  /**
+   * ```NEEDS REFACTOR``` Gives the urlpath of an image asset.
+   *
+   * @param {string} path
+   * @returns {string}
+   */
   getFullPathImage(path:string) {
+    //TODO: Needs refactor into service
     return ((this.platform.is('android') ? this.fileSystem.externalDataDirectory : this.fileSystem.dataDirectory) + "images/" + path).replace(/^file:\/\//, '');
   }
 
+  /**
+   * ```NEEDS REFACTOR``` Gives the urlpath of an sound asset.
+   *
+   * @param {string} path
+   * @returns {string}
+   */
   getFullPathSound(path:string) {
+    //TODO: Needs refactor into service
     return ((this.platform.is('android') ? this.fileSystem.externalDataDirectory : this.fileSystem.dataDirectory) + "sounds/" + path).replace(/^file:\/\//, '');
   }
 
+  /**
+   * Plays sound gived the path
+   *
+   * @param {string} path
+   */
   playSound(path:string) {
     let sound = this.media.create(this.getFullPathSound(path));
     sound.play();
   }
 
+  /**
+   * Removes custom item from board.
+   * 
+   * @param {number} itemID
+   */
   removeItemBoard(itemID:number) {
     this.database.removeItemBoard(itemID, this.boardID).then(() => {
       this.loadItems();

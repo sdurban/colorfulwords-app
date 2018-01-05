@@ -1,3 +1,6 @@
+/**
+ * Item Model definition
+ */
 interface Item {
   id: number,
   title: string,

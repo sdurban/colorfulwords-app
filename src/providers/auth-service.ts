@@ -9,6 +9,11 @@ import {Storage} from "@ionic/storage";
 export class AuthService {
   constructor(public serverProvider: ServerProvider, public storage: Storage) { }
 
+  /**
+   * Function responsible of validating data and call login service.
+   *
+   * @param credentials
+   */
   public login(credentials) {
     if (credentials.email === null || credentials.email == "" || credentials.password === null || credentials.password == "" ) {
       return Observable.throw("missingdata_string");
@@ -29,6 +34,11 @@ export class AuthService {
     }
   }
 
+  /**
+   * Function responsible of validating data and call register service.
+   *
+   * @param credentials
+   */
   public register(credentials) {
     if (credentials.email === null || credentials.email == "" || credentials.password === null || credentials.password === "" || credentials.repeatpassword == null || credentials.repeatpassword == "") {
       return Observable.throw("missingdata_string");
@@ -51,6 +61,11 @@ export class AuthService {
     }
   }
 
+  /**
+   * Returns user email.
+   *
+   * @returns {Promise}
+   */
   public getUserInfo() {
     return new Promise((success) => {
       this.storage.get('user_email').then(data => {
@@ -59,6 +74,9 @@ export class AuthService {
     });
   }
 
+  /**
+   * Logout the current user.
+   */
   public logout() {
     return Observable.create(observer => {
       this.storage.remove("user_email").then(() => {

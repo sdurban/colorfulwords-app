@@ -10,10 +10,16 @@ import {ImagePage} from "./image/image";
 export class FilesPage {
   constructor(public nav: Nav, public navParams: NavParams) { }
 
+  /**
+   * Loads SoundPage controller
+   */
   goSound() {
     this.nav.push(SoundPage);
   }
 
+  /**
+   * Loads Image controller
+   */
   goImage() {
     this.nav.push(ImagePage);
   }

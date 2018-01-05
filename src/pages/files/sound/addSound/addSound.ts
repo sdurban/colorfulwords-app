@@ -17,6 +17,15 @@ export class AddSoundPage {
   fileRecord:MediaObject;
   nameRecordingFile:string = '';
 
+  /**
+   * Constructor of addSound, checks if folder is created if not creates.
+   *
+   * @param {DatabaseService} database
+   * @param {ViewController} viewCtrl
+   * @param {File} fileSystem
+   * @param {Media} media
+   * @param {Platform} platform
+   */
   constructor(public database: DatabaseService, public viewCtrl: ViewController, public fileSystem: File, public media: Media, public platform: Platform) {
     let dataDirectory = "";
     if(this.platform.is('android')) {
@@ -36,12 +45,18 @@ export class AddSoundPage {
     });
     }
 
+  /***
+   * Inserts sound in database and returns context to last view.
+   */
   createSound() {
     this.database.createFile(this.file.title, this.nameFile, "SOUND").then(() => {
       this.viewCtrl.dismiss();
     });
   }
 
+  /**
+   * Record sound using Microphone bundled in device.
+   */
   recordSound() {
     this.nameFile = new Date().toISOString() + Math.random().toString(36).substring(9);
     this.nameFile = this.nameFile.replace(/\-/g, "").replace(/\:/g, "").replace(/\./g, "");
@@ -54,6 +69,9 @@ export class AddSoundPage {
     });
   }
 
+  /**
+   * Stop recording
+   */
   stoprecordSound() {
     this.fileRecord.stopRecord();
     this.file.path = this.nameRecordingFile;
@@ -61,6 +79,9 @@ export class AddSoundPage {
     this.recording = false;
   }
 
+  /**
+   * Plays the file recorded
+   */
   playSound() {
     this.fileRecord.play();
   }

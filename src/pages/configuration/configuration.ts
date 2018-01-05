@@ -11,6 +11,14 @@ import {Storage} from "@ionic/storage";
 export class ConfigurationPage {
   language: string;
 
+  /**
+   * Constructor configuration Page
+   *
+   * @param {KidProvider} kidMode
+   * @param {TranslateService} translate
+   * @param {Globalization} globalization
+   * @param {Storage} storage
+   */
   constructor(public kidMode: KidProvider, public translate: TranslateService, public globalization: Globalization, public storage: Storage) {
     this.storage.get('language').then((val) => {
       if(val != null) {
@@ -30,10 +38,18 @@ export class ConfigurationPage {
     });
   }
 
+  /**
+   * Setups PIN for kidMode
+   */
   setPin() {
     this.kidMode.setPin();
   }
 
+  /**
+   * Changes global language
+   *
+   * @param $event Event trigered by click
+   */
   chgLanguage($event) {
     if(typeof $event.stopPropagation !== "undefined") {
       $event.stopPropagation();

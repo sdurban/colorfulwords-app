@@ -20,6 +20,11 @@ export class ImagePage {
     this.loadImages();
   }
 
+  /**
+   * Load/Updates images showed in the page.
+   *
+   * @returns {Promise}
+   */
   loadImages() {
     this.images = [];
     return new Promise(success => {
@@ -32,6 +37,9 @@ export class ImagePage {
     });
   }
 
+  /**
+   * Loads AddImagePage controller as modal and shows.
+   */
   addImage() {
     let addSoundModal = this.modalCtrl.create(AddImagePage, {}, {"enableBackdropDismiss": false});
 
@@ -42,7 +50,13 @@ export class ImagePage {
     addSoundModal.present();
   }
 
+  /**
+   * Deletes file from database
+   *
+   * @param id
+   */
   removeImage(id:number) {
+    //TODO: Delete from filesystem
     return new Promise(success => {
       this.databaseService.deleteFile(id).then(() => {
         this.loadImages();
@@ -51,10 +65,22 @@ export class ImagePage {
     })
   }
 
+  /**
+   * ```NEEDS REFACTOR``` Gives the urlpath of an image asset.
+   *
+   * @param {string} path
+   * @returns {string}
+   */
   getFullPath(path:string) {
+    //TODO: Needs refactor into service
     return ((this.platform.is('android') ? this.fileSystem.externalDataDirectory : this.fileSystem.dataDirectory) + "images/" + path).replace(/^file:\/\//, '');
   }
 
+  /**
+   * If this view is loaded as a modal returns the Image selected.
+   *
+   * @param {FileModel} image
+   */
   returnImage(image:FileModel) {
     if(this.isModal) {
       this.view.dismiss({'image': image});

@@ -55,6 +55,7 @@
     "cordova-sqlite-storage": "^2.1.2",
     "es6-promise-plugin": "^4.1.1",
     "flag-icon-css": "git+https://github.com/lipis/flag-icon-css.git#2.9.0",
+    "help": "3.0.2",
     "ionic-angular": "3.9.2",
     "ionic-plugin-keyboard": "^2.2.1",
     "ionicons": "3.0.0",

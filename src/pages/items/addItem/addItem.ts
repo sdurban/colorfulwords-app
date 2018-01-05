@@ -28,20 +28,43 @@ export class AddItemsPage {
     this.path = this.fileSystem.dataDirectory;
   }
 
+  /**
+   * ```NEEDS REFACTOR``` Gives the urlpath of an image asset.
+   *
+   * @param {string} path
+   * @returns {string}
+   */
   getFullPathImage(path:string) {
+    //TODO: Needs refactor into service
     return ((this.platform.is('android') ? this.fileSystem.externalDataDirectory : this.fileSystem.dataDirectory) + "images/" + path).replace(/^file:\/\//, '');
   }
 
+  /**
+   * ```NEEDS REFACTOR``` Gives the urlpath of an sound asset.
+   *
+   * @param {string} path
+   * @returns {string}
+   */
   getFullPathSound(path:string) {
+    //TODO: Needs refactor into service
     return ((this.platform.is('android') ? this.fileSystem.externalDataDirectory : this.fileSystem.dataDirectory) + "sounds/" + path).replace(/^file:\/\//, '');
   }
 
+  /**
+   * Plays sound selected.
+   *
+   * @param $event
+   * @param {string} path
+   */
   playSound($event, path:string) {
     $event.stopPropagation();
     let sound = this.media.create(this.getFullPathSound(path));
     sound.play();
   }
 
+  /**
+   * Loads soundpage as a modal and takes the selected sound on return.
+   */
   goSound() {
     this.sound = <FileModel>{};
     let soundModal = this.modalCtrl.create(SoundPage, {'select': 1}, {"enableBackdropDismiss": false});
@@ -56,6 +79,9 @@ export class AddItemsPage {
     soundModal.present();
   }
 
+  /**
+   * Loads imagepage as a modal and takes the selected image on return.
+   */
   goImage() {
     this.image = <FileModel>{};
     let imageModal = this.modalCtrl.create(ImagePage, {'select': 1}, {"enableBackdropDismiss": false});
@@ -70,6 +96,9 @@ export class AddItemsPage {
     imageModal.present();
   }
 
+  /**
+   * Takes all data in form and creates a new item and assigns it to current Board
+   */
   createItem() {
     if(this.title != '' && this.image.id != null && this.sound.id != null) {
       this.database.createItem(this.title, this.image.id, this.sound.id).then(itemID => {

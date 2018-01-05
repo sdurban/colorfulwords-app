@@ -10,6 +10,12 @@ export class DatabaseService {
   private database: SQLiteObject;
   private dbReady = new BehaviorSubject<boolean>(false);
 
+  /**
+   * Creates the database and tables.
+   *
+   * @param {Platform} platform
+   * @param {SQLite} sqlite
+   */
   constructor(private platform:Platform, private sqlite:SQLite) {
     this.platform.ready().then(() => {
       this.sqlite.create({
@@ -26,6 +32,11 @@ export class DatabaseService {
     });
   }
 
+  /**
+   * Checks if database is ready (is created and has tables created)
+   *
+   * @returns {Promise}
+   */
   private isReady(){
     return new Promise((resolve, reject) => {
       if(this.dbReady.getValue()){
@@ -41,6 +52,11 @@ export class DatabaseService {
     })
   }
 
+  /**
+   * Creates all database tables
+   *
+   * @returns {Promise}
+   */
   private createTables(){
     return new Promise(resolve => {
       this.database.executeSql(
@@ -85,6 +101,13 @@ export class DatabaseService {
     });
   }
 
+  /**
+   * Updates File id_server from given id
+   *
+   * @param {number} id
+   * @param {number} id_server
+   * @returns {Promise<void>}
+   */
   updateFileUpload(id:number, id_server:number) {
     return this.isReady().then(() => {
       this.database.executeSql("UPDATE File SET id_server = ? WHERE id = ?", [id_server, id]).then(() => {
@@ -95,6 +118,13 @@ export class DatabaseService {
     })
   }
 
+  /**
+   * Updates Item id_server from given id
+   *
+   * @param {number} id
+   * @param {number} id_server
+   * @returns {Promise<void>}
+   */
   updateItemUpload(id:number, id_server:number) {
     return this.isReady().then(() => {
       this.database.executeSql("UPDATE Item SET id_server = ? WHERE id = ?", [id_server, id]).then(() => {
@@ -105,6 +135,13 @@ export class DatabaseService {
     })
   }
 
+  /**
+   * Updates Board id_server from given id
+   *
+   * @param {number} id
+   * @param {number} id_server
+   * @returns {Promise<void>}
+   */
   updateBoard(id:number, id_server:number) {
     return this.isReady().then(() => {
       this.database.executeSql("UPDATE Board SET id_server = ? WHERE id = ?", [id_server, id]).then(() => {
@@ -115,6 +152,13 @@ export class DatabaseService {
     })
   }
 
+  /**
+   * Updates BoardItems id_server from given id
+   *
+   * @param {number} id
+   * @param {number} id_server
+   * @returns {Promise<void>}
+   */
   updateBoardItems(id:number, id_server:number) {
     return this.isReady().then(() => {
       this.database.executeSql("UPDATE BoardItems SET id_server = ? WHERE id = ?", [id_server, id]).then(() => {
@@ -125,6 +169,12 @@ export class DatabaseService {
     })
   }
 
+  /**
+   * Inserts new board with given title.
+   *
+   * @param {string} title
+   * @returns {Promise<boolean>}
+   */
   createBoard(title:string) {
     return this.isReady().then(() => {
       return this.database.executeSql("INSERT INTO Board(title) VALUES (?)", [title])
@@ -136,6 +186,11 @@ export class DatabaseService {
     });
   }
 
+  /**
+   * Return all boards with first item and files in it.
+   *
+   * @returns {Promise<Board[]>}
+   */
   getAllBoards() {
     return this.isReady().then(() => {
       return this.database.executeSql("SELECT Board.*, File.path, MIN(BoardItems.id) FROM Board" +
@@ -162,6 +217,12 @@ export class DatabaseService {
     })
   }
 
+  /**
+   * Returns all items from a given boardid.
+   *
+   * @param {number} board
+   * @returns {Promise<Item[]>}
+   */
   getItemsBoard(board:number) {
     return this.isReady().then(() => {
       return this.database.executeSql("SELECT Item.id, Item.title, FileImg.path as imgpath, FileSound.path as soundpath, BoardItems.position FROM  " +
@@ -193,6 +254,12 @@ export class DatabaseService {
     })
   }
 
+  /**
+   * Deletes File with given id.
+   *
+   * @param {number} id
+   * @returns {Promise<boolean>}
+   */
   deleteFile(id:number) {
     return this.isReady().then(() => {
       return this.database.executeSql("DELETE FROM File WHERE id = ?", [id])
@@ -204,6 +271,14 @@ export class DatabaseService {
     })
   }
 
+  /**
+   * Creates item with given parameters
+   *
+   * @param {string} title
+   * @param {number} id_photo
+   * @param {number} id_sound
+   * @returns {Promise}
+   */
   createItem(title:string, id_photo:number, id_sound:number) {
     return this.isReady().then(() => {
       return this.database.executeSql("INSERT INTO Item(title, field1, field2) VALUES (?, ?, ?)", [title, id_photo, id_sound])
@@ -215,6 +290,11 @@ export class DatabaseService {
     });
   }
 
+  /**
+   * Get all files in the app.
+   *
+   * @returns {Promise<FileModel[]>}
+   */
   getAllFiles() {
     return this.isReady().then(() => {
       return this.database.executeSql("SELECT * FROM File ORDER BY title", {}).then(data => {
@@ -237,6 +317,12 @@ export class DatabaseService {
     });
   }
 
+  /**
+   * Get single file from given id.
+   *
+   * @param {number} id
+   * @returns {Promise<FileModel[]>}
+   */
   getFile(id:number) {
     return this.isReady().then(() => {
       return this.database.executeSql("SELECT * FROM File WHERE id = ? ORDER BY title", [id]).then(data => {
@@ -259,7 +345,11 @@ export class DatabaseService {
     });
   }
 
-
+  /**
+   * Get alls images in the app
+   *
+   * @returns {Promise<FileModel[]>}
+   */
   getAllImages() {
     return this.isReady().then(() => {
       return this.database.executeSql("SELECT * FROM File WHERE type = 'IMAGE' ORDER BY title", {}).then(data => {
@@ -281,6 +371,11 @@ export class DatabaseService {
     });
   }
 
+  /**
+   * Get all sounds in the app
+   *
+   * @returns {Promise<FileModel[]>}
+   */
   getAllSounds() {
     return this.isReady().then(() => {
       return this.database.executeSql("SELECT * FROM File WHERE type = 'SOUND' ORDER BY title", {}).then(data => {
@@ -302,6 +397,15 @@ export class DatabaseService {
     });
   }
 
+  /**
+   * Creates a files with given parameters
+   *
+   * @param {string} name
+   * @param {string} path
+   * @param {string} type
+   * @param {number} id_server
+   * @returns {Promise<boolean>}
+   */
   createFile(name:string, path:string, type:string, id_server:number = 0) {
     return this.isReady().then(() => {
       return this.database.executeSql("INSERT INTO File(id_server, type, title, path) VALUES (?, ?, ?, ?)", [id_server, type, name, path])
@@ -313,6 +417,14 @@ export class DatabaseService {
     })
   }
 
+  /**
+   * Assigns custom itemID to a board.
+   *
+   * @param {number} item
+   * @param {number} board
+   * @param {number} position
+   * @returns {Promise<boolean>}
+   */
   assignItemBoard(item:number, board:number, position:number) {
     return this.isReady().then(() => {
       return this.database.executeSql("INSERT INTO BoardItems(boardID, itemID, position) VALUES (?, ?, ?)", [board, item, position])
@@ -324,6 +436,13 @@ export class DatabaseService {
     })
   }
 
+  /**
+   * Removes given itemid from board.
+   *
+   * @param {number} item
+   * @param {number} board
+   * @returns {Promise<void>}
+   */
   removeItemBoard(item:number, board:number) {
     return this.isReady().then(() => {
       return this.database.executeSql("DELETE FROM BoardItems WHERE boardID = ? AND itemID = ?", [board, item])
@@ -337,6 +456,12 @@ export class DatabaseService {
     });
   }
 
+  /**
+   * Deletes item from database.
+   *
+   * @param {number} itemID
+   * @returns {Promise<boolean>}
+   */
   deleteItem(itemID:number) {
     return this.isReady().then(() => {
       return this.database.executeSql("DELETE FROM Item WHERE id = ?", [itemID])
@@ -348,6 +473,11 @@ export class DatabaseService {
     })
   }
 
+  /**
+   * Delete all information from all tables.
+   *
+   * @returns {Promise<void>}
+   */
   deleteAll() {
     return this.isReady().then(() => {
       return this.database.executeSql("DELETE FROM BoardItems", []).then(() => {

@@ -21,6 +21,11 @@ export class SoundPage {
     this.loadSound();
   }
 
+  /**
+   * Load/Updates sounds showed in the page.
+   *
+   * @returns {Promise}
+   */
   loadSound() {
     this.sounds = [];
     return new Promise(resolve => {
@@ -32,6 +37,9 @@ export class SoundPage {
     })
   }
 
+  /**
+   * Loads AddSoundPage controller as modal and shows.
+   */
   addSound() {
     let addSoundModal = this.modalCtrl.create(AddSoundPage, {'select': 0}, {"enableBackdropDismiss": false});
 
@@ -42,21 +50,44 @@ export class SoundPage {
     addSoundModal.present();
   }
 
+  /**
+   * Reproduce sound of current clicked item
+   *
+   * @param path
+   */
   playSound(path) {
     let sound = this.media.create(this.getFullPath(path));
     sound.play();
   }
 
+  /**
+   * Deletes file from database
+   *
+   * @param id
+   */
   removeSound(id) {
+    //TODO: Delete from filesystem
     this.databaseService.deleteFile(id).then(() => {
       this.loadSound();
     });
   }
 
+  /**
+   * ```NEEDS REFACTOR``` Gives the urlpath of an sound asset.
+   *
+   * @param {string} path
+   * @returns {string}
+   */
   getFullPath(path:string) {
+    //TODO: Needs refactor into service
     return ((this.platform.is('android') ? this.fileSystem.externalDataDirectory : this.fileSystem.dataDirectory) + "sounds/" + path).replace(/^file:\/\//, '');
   }
 
+  /**
+   * If this view is loaded as a modal returns the sound selected.
+   *
+   * @param {FileModel} sound
+   */
   returnSound(sound:FileModel) {
     if(this.isModal) {
       this.view.dismiss({'sound': sound});

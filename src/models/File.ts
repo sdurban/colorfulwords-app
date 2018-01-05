@@ -1,3 +1,6 @@
+/**
+ * File Model definition
+ */
 interface FileModel {
   id: number,
   id_server: number,

@@ -17,6 +17,16 @@ export class AddImagePage {
   nameImageFile:string = '';
   options: CameraOptions = {};
 
+  /**
+   * Constructor of addImage, checks if folder is created if not creates.
+   *
+   * @param {DatabaseService} database
+   * @param {ViewController} viewCtrl
+   * @param {File} fileSystem
+   * @param {Camera} camera
+   * @param {Platform} platform
+   * @param {FilePath} filePath
+   */
   constructor(public database: DatabaseService, public viewCtrl: ViewController, public fileSystem: File, public camera: Camera, public platform: Platform, public filePath: FilePath) {
     this.options = {
       quality: 100,
@@ -39,6 +49,11 @@ export class AddImagePage {
     });
   }
 
+  /**
+   * Opens camera or library and copy the selected picture or photo taked into local app folder.
+   *
+   * @param sourceType
+   */
   public takePicture(sourceType) {
     this.options.sourceType = sourceType;
     this.camera.getPicture(this.options).then((imagePath) => {
@@ -58,6 +73,13 @@ export class AddImagePage {
     });
   }
 
+  /**
+   * Copy file from one folder to another.
+   *
+   * @param namePath
+   * @param currentName
+   * @param newFileName
+   */
   private copyFileToLocalDir(namePath, currentName, newFileName) {
     this.fileSystem.copyFile(namePath, currentName, this.imagePath, newFileName).then(success => {
       this.file.path = newFileName;
@@ -66,6 +88,11 @@ export class AddImagePage {
     });
   }
 
+  /**
+   * Generates a filename with date and 9 random characters.
+   *
+   * @returns {string}
+   */
   private createFileName() {
     let nameFile = new Date().toISOString() + Math.random().toString(36).substring(9);
     nameFile = nameFile.replace(/\-/g, "").replace(/\:/g, "").replace(/\./g, "");
@@ -73,13 +100,23 @@ export class AddImagePage {
     return nameFile;
   }
 
+  /***
+   * Inserts image in database and returns context to last view.
+   */
   public createPicture() {
     this.database.createFile(this.file.title, this.file.path, "IMAGE").then(() => {
       this.viewCtrl.dismiss();
     });
   }
 
+  /**
+   * ```NEEDS REFACTOR``` Gives the urlpath of an sound asset.
+   *
+   * @param {string} path
+   * @returns {string}
+   */
   public fullImagePath(path) {
+    //TODO: Needs refactor into service
     return ((this.platform.is('android') ? this.fileSystem.externalDataDirectory : this.fileSystem.dataDirectory) + "images/" + path).replace(/^file:\/\//, '');
   }
 }

@@ -38,14 +38,27 @@ export class LoginPage {
     this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
   }
 
+  /**
+   * Changes the current app language to the selected flag.
+   *
+   * @param {string} lang
+   */
   changeLanguage(lang:string) {
     this.translate.use(lang);
   }
 
+  /**
+   * Changes parameter context for loading register or login information.
+   *
+   * @param {string} context
+   */
   changeContext(context:string) {
     this.context = context;
   }
 
+  /**
+   * Makes http requests and determines if user is valid an can enter app.
+   */
   login() {
     this.translate.get('loginloading_string').subscribe(
       value => {
@@ -92,6 +105,9 @@ export class LoginPage {
     )
   }
 
+  /**
+   * Register a new user to API
+   */
   register() {
     this.translate.get('createaccount_string').subscribe(
       value => {

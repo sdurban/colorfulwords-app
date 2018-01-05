@@ -31,6 +31,12 @@ export class ServerProvider {
     });
   }
 
+  /**
+   * Handles calls to login service and records bearer returned.
+   *
+   * @param credentials
+   * @returns {Promise} Current response
+   */
   login(credentials) {
     return new Promise((resolve, reject) => {
       this.http.post(this.urlAPI+'user/login', JSON.stringify(credentials), {headers: this.headers}).subscribe(data => {
@@ -52,6 +58,12 @@ export class ServerProvider {
     });
   }
 
+  /**
+   * Handles calls to register service and records bearer returned.
+   *
+   * @param credentials
+   * @returns {Promise}
+   */
   register(credentials) {
     return new Promise((resolve, reject) => {
       this.http.post(this.urlAPI+'user/register', JSON.stringify(credentials), {headers: this.headers}).subscribe(data => {
@@ -75,6 +87,12 @@ export class ServerProvider {
     });
   }
 
+  /**
+   * Starts the syncing process.
+   *
+   * @param {LoadingController} loading
+   * @returns {Promise}
+   */
   sync(loading:LoadingController) {
     return new Promise(resolve => {
       let loader = loading.create({
@@ -90,6 +108,12 @@ export class ServerProvider {
     });
   }
 
+  /**
+   * Syncs the files, first make a call to see diferences between app and server then download missing data,
+   * and finish uploading missing data in server.
+   * @param loader
+   * @returns {Promise<any>}
+   */
   private syncfiles(loader) {
     return new Promise((resolve, reject) => {
       this.database.getAllFiles().then(files => {
@@ -107,6 +131,14 @@ export class ServerProvider {
     });
   }
 
+  /**
+   * Takes an array of items to download and resolve recursively. First download first item and then call itself with
+   * shifted array of items.
+   *
+   * @param loader Loading message context
+   * @param arr_download Array with items to download
+   * @param resolve promise result passed for recursivity.
+   */
   private downloadfiles(loader, arr_download, resolve = null) {
     if(resolve == null) {
       return new Promise((resolve, reject) => {
@@ -154,6 +186,14 @@ export class ServerProvider {
     })
   }
 
+  /**
+   * Takes an array of items to upload and resolve recursively. First upload first item and then call itself with
+   * shifted array of items.
+   *
+   * @param loader Loading message context
+   * @param arr_upload Array with items to upload
+   * @param resolve promise result passed for recursivity.
+   */
   private uploadfile(loader, arr_upload, resolve = null) {
     if(resolve == null) {
       return new Promise((resolve, reject) => {

@@ -24,6 +24,9 @@ export class DashboardPage {
     })
   }
 
+  /**
+   * Loads addBoardPage in a modal.
+   */
   addBoard() {
     let addBoardModal = this.modalCtrl.create(AddBoardPage);
 
@@ -34,6 +37,11 @@ export class DashboardPage {
     addBoardModal.present();
   }
 
+  /**
+   * Load/Updates boards showed in the page.
+   *
+   * @returns {Promise}
+   */
   loadBoards() {
     this.boards = [];
     return new Promise((resolve, reject) => {
@@ -46,14 +54,30 @@ export class DashboardPage {
     })
   }
 
+  /**
+   * Loads ItemsPage Controller with the items of clicked boardID
+   *
+   * @param {number} boardID
+   * @param {string} boardName
+   */
   goBoard(boardID:number, boardName:string) {
     this.nav.push(ItemsPage, {'boardID': boardID, 'titleBoard': boardName});
   }
 
+  /**
+   * ```NEEDS REFACTOR``` Gives the urlpath of an image asset.
+   *
+   * @param {string} path
+   * @returns {string}
+   */
   getFullPathImage(path:string) {
+    //TODO: Refactor in a provider
     return ((this.platform.is('android') ? this.fileSystem.externalDataDirectory : this.fileSystem.dataDirectory) + "images/" + path).replace(/^file:\/\//, '');
   }
 
+  /**
+   * Fix for back button changing the context when returning to this controller.
+   */
   ionViewDidEnter() {
     this.loadBoards();
   }

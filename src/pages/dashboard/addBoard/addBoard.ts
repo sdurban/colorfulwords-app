@@ -13,6 +13,9 @@ export class AddBoardPage {
 
   }
 
+  /**
+   * Creates a board with inserted data and dismiss controller.
+   */
   createBoard() {
     this.database.createBoard(this.board.title).then(() => {
       this.viewCtrl.dismiss();
