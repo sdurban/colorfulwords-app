@@ -1,0 +1,3 @@
+Just a pretty old project I do for university research.
+
+Maybe I will make a better readme sometime...
